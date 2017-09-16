@@ -10,10 +10,14 @@ public class Jogador {
 	private int nivel;
 		
 	public void Logar(){
-		
+		if(this.login == "admin" && this.senha == "1234")
+			System.out.println("Logando com sucesso");
+		else
+			System.out.println("Login ou senha invalidos!");
+			
 	}
 	public void Cadastrar(){
-		
+		System.out.println("Jogandor salvo com sucesso!");
 	}
 	
 	public Jogador() {
@@ -29,6 +33,11 @@ public class Jogador {
 		this.nivel = nivel;
 	}
 	
+	
+	public Jogador(String nome) {
+		super();
+		this.nome = nome;
+	}
 	public String getNome() {
 		return nome;
 	}
@@ -71,4 +80,13 @@ public class Jogador {
 	public void setNivel(int nivel) {
 		this.nivel = nivel;
 	}
+	@Override
+	public String toString() {
+		return "Jogador nome=" + nome + ", idade=" + idade + ", login=" + login + ", senha=" + senha + ", telefone="
+				+ telefone + ", pontos=" + pontos + ", nivel=" + nivel + "";
+	}
+	
+	
+	
+	
 }

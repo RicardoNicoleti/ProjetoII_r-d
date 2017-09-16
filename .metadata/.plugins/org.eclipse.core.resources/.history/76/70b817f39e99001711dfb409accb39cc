@@ -1,0 +1,24 @@
+package br.edu.facear.classes;
+
+public class Jogo {
+	
+	
+	
+	public void Jogar(){
+		System.out.println("Jogando");
+		
+	}
+	public void FazerPergunta(){
+		System.out.println("Fazendo pergunta");
+	}
+
+	public void MostrarRanking(){
+		System.out.println("Mostrando ranking");
+	}
+	
+	public void EscolherAdversario(){
+		System.out.println("Escolhendo adversario");
+	}
+	
+	
+}

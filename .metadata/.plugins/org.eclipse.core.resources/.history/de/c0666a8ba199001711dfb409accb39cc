@@ -1,0 +1,36 @@
+package br.edu.facear.telas;
+
+import br.edu.facear.classes.Jogador;
+
+public class Principal {
+
+	public static void main(String[] args) {
+		
+		//Instancia
+		Jogador j1 = new Jogador();
+		Jogador j2 = new Jogador();
+
+		j1.setLogin("admin");
+		j1.setSenha("145");
+		
+		j1.Cadastrar();
+		j2.Cadastrar();
+		
+//		Ranking r = new Ranking();	
+//		//Atribuição
+//		j2.setLogin("admin");
+//		j2.setSenha("145");
+		
+		
+//		r.GerenciarRanking();
+
+//		Categoria c = new Categoria();
+//		c.setCategoria("Geografia");
+//		c.GerenciarCategoria();
+		
+		
+		
+
+	}
+
+}

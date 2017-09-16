@@ -4,17 +4,24 @@ public class Categoria {
 	
 	private int idCategoria;
 	private String categoria;
-	
+	private Pergunta pergunta;
 	
 	public void GerenciarCategoria(){
-		
+		System.out.println(this.categoria);
 	}
 		
 	public Categoria(){
 		
 	}
 	
-	
+	public Pergunta getPergunta() {
+		return pergunta;
+	}
+
+	public void setPergunta(Pergunta pergunta) {
+		this.pergunta = pergunta;
+	}
+
 	public Categoria(int idCategoria, String categoria) {
 		this.idCategoria = idCategoria;
 		this.categoria = categoria;
