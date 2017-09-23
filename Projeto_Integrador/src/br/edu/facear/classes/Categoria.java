@@ -7,7 +7,7 @@ public class Categoria {
 	private Pergunta pergunta;
 	
 	public void GerenciarCategoria(){
-		System.out.println(this.categoria);
+		
 	}
 		
 	public Categoria(){

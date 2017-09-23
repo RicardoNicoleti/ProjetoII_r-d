@@ -12,18 +12,18 @@ import br.edu.facear.classes.Ranking;
 public class Principal {
 
 	public static void main(String[] args) {
-		
-		//Instancia
-		
+
+		// Instancia
 		Jogador jogador = new Jogador();
 		Jogo jogo = new Jogo();
 		Ranking ranking = new Ranking();
-
-		//Perguntas
 		Categoria categoria = new Categoria();
 		Pergunta pergunta = new Pergunta();
-		
-		//Atribuição
+
+		// Atribuição
+
+		// Criando um novo jogador -----------------------
+
 		List<Jogador> listaJogador = new ArrayList<Jogador>();
 		jogador.setNome("Ricardo");
 		jogador.setIdade(27);
@@ -31,34 +31,46 @@ public class Principal {
 		jogador.setNivel(3);
 		jogador.setPontos(1082);
 		jogador.setLogin("admin");
-		jogador.setSenha("1234");
+		jogador.setSenha("12234");
 
 		listaJogador.add(jogador);
-		
-		jogador.Logar();
+		// ---------------------------------------------
 
-		jogo.setJogador(jogador);
-		
-		jogo.Jogar();
-		
-		
-		ranking.setJogador(jogador);
-		ranking.GerenciarRanking();
-
+		// Inserindo Perguntas no sistema-------------------
 		ArrayList<Pergunta> listaPerguntas = new ArrayList<Pergunta>();
-		pergunta.setPergunta("Pergunta ");
+		categoria.setCategoria("Categoria 1");
+		pergunta.setPergunta("Pergunta 1");
 		pergunta.setAlternativas1("Alternativa 1");
 		pergunta.setAlternativas2("Alternativa 2");
 		pergunta.setAlternativas3("Alternativa 3");
 		pergunta.setCorreta("Alternativa Correta!");
-		categoria.setPergunta(pergunta);
+		pergunta.setCategoria(categoria);
+//		categoria.setPergunta(pergunta);
 		listaPerguntas.add(pergunta);
+
 		
+		// Inserir um jogador-------------
+		jogador.Logar();
+		
+		
+		//Jogar---------------------------
+		jogo.setJogador(jogador);
+		jogo.setPergunta(pergunta);
+		jogo.setTempo(30);
+		jogo.setVez(1);
+		jogo.Jogar();
+		// -----------------------------------------------
+		
+		// Protótipo de ranking --------------------------
+		System.out.println("Ranking---------------------");
+		ranking.setJogador(jogador);
+		ranking.GerenciarRanking();
+		
+		// -----------------------------------------------
+
 		pergunta.AvaliarPerguntas();
 		
-		for (Pergunta pergunta2 : listaPerguntas) {
-			System.out.println(pergunta2);
-		}
 		
+
 	}
 }

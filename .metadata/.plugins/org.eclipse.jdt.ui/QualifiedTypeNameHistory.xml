@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="br.edu.facear.classes.Categoria"/>
-<fullyQualifiedTypeName name="br.edu.facear.classes.Ranking"/>
-<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.sql.Array"/>
+<fullyQualifiedTypeName name="br.edu.facear.classes.Jogo"/>
 <fullyQualifiedTypeName name="br.edu.facear.classes.Jogador"/>
+<fullyQualifiedTypeName name="br.edu.facear.classes.Ranking"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="br.edu.facear.classes.Pergunta"/>
+<fullyQualifiedTypeName name="br.edu.facear.classes.Categoria"/>
 </qualifiedTypeNameHistroy>

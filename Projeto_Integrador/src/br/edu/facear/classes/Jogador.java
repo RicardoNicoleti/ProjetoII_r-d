@@ -1,5 +1,7 @@
 package br.edu.facear.classes;
 
+import java.util.ArrayList;
+
 public class Jogador {
 	private String nome;
 	private int idade;
@@ -14,10 +16,21 @@ public class Jogador {
 			System.out.println("Logando com sucesso");
 		else
 			System.out.println("Login ou senha invalidos!");
-			
+
 	}
 	public void Cadastrar(){
-		System.out.println("Jogandor salvo com sucesso!");
+		try {
+			ArrayList<Jogador> lista = new ArrayList<Jogador>();
+			this.getNome();
+			this.getIdade();
+			this.getLogin();
+			this.getPontos();
+			this.getSenha();
+			lista.add(this);
+			System.out.println("Cadastrado com sucesso!");
+		} catch (Exception e) {
+			System.out.println("Erro ao salvar");
+		}
 	}
 	
 	public Jogador() {

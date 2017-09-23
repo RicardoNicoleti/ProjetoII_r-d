@@ -9,6 +9,8 @@ public class Pergunta {
 	private String alternativas2;
 	private String alternativas3;
 	private String correta;
+	private Categoria categoria;
+	
 	
 	public void CadastrarPerguntas(){
 		
@@ -100,6 +102,14 @@ public class Pergunta {
 	public void setCorreta(String correta) {
 		this.correta = correta;
 	}
+		
+	public Categoria getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+	
 	@Override
 	public String toString() {
 		return "Pergunta id=" + id  + avaliacao + "\n" +   pergunta + "\n" 
