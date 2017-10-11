@@ -1,0 +1,65 @@
+package br.edu.facear.telas;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JDesktopPane;
+import java.awt.Font;
+
+public class Tela_inicial extends JFrame {
+
+	private JPanel contentPane;
+
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Tela_inicial frame = new Tela_inicial();
+					frame.setExtendedState(MAXIMIZED_BOTH);
+
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	public Tela_inicial() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 1144, 762);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblBemVindo = new JLabel("Seja Bem Vindo");
+		lblBemVindo.setBounds(642, 97, 142, 14);
+		contentPane.add(lblBemVindo);
+		
+		JButton btnVerRanking = new JButton("Ver Ranking");
+		btnVerRanking.setFont(new Font("Arial", Font.PLAIN, 16));
+		btnVerRanking.setBounds(568, 246, 230, 94);
+		contentPane.add(btnVerRanking);
+		
+		JButton btnAvaliar = new JButton("Avaliar Pergunta");
+		btnAvaliar.setFont(new Font("Arial", Font.PLAIN, 16));
+		btnAvaliar.setBounds(568, 456, 230, 94);
+		contentPane.add(btnAvaliar);
+		
+		JButton btnCadastrar = new JButton("Cadastrar perguntas");
+		btnCadastrar.setFont(new Font("Arial", Font.PLAIN, 16));
+		btnCadastrar.setBounds(568, 351, 230, 94);
+		contentPane.add(btnCadastrar);
+				
+		JButton btnJogar = new JButton("Jogar");
+		btnJogar.setFont(new Font("Arial", Font.PLAIN, 16));
+		btnJogar.setBounds(568, 141, 230, 94);
+		contentPane.add(btnJogar);
+	}
+}

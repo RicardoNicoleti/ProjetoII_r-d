@@ -1,0 +1,93 @@
+package br.edu.facear.telas;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.FlowLayout;
+import javax.swing.SwingConstants;
+
+public class Teste extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField;
+	private JTextField textField_1;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Teste frame = new Teste();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Teste() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		
+		JPanel panel = new JPanel();
+		FlowLayout flowLayout_1 = (FlowLayout) panel.getLayout();
+		flowLayout_1.setAlignOnBaseline(true);
+		contentPane.add(panel, BorderLayout.CENTER);
+		
+		JLabel label = new JLabel("Login");
+		panel.add(label);
+		label.setFont(new Font("Arial", Font.PLAIN, 14));
+		
+		JPanel panel_2 = new JPanel();
+		panel.add(panel_2);
+		
+		textField = new JTextField();
+		textField.setColumns(30);
+		panel_2.add(textField);
+		
+		JLabel label_1 = new JLabel("Senha");
+		panel.add(label_1);
+		label_1.setFont(new Font("Arial", Font.PLAIN, 14));
+		
+		JPanel panel_3 = new JPanel();
+		panel.add(panel_3);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(30);
+		panel_3.add(textField_1);
+		
+		JPanel panel_4 = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panel_4.getLayout();
+		flowLayout.setHgap(28);
+		panel.add(panel_4);
+		
+		JButton button = new JButton("Entrar");
+		button.setFont(new Font("Arial", Font.PLAIN, 16));
+		panel_4.add(button);
+		
+		JButton button_1 = new JButton("Sair");
+		button_1.setFont(new Font("Arial", Font.PLAIN, 16));
+		panel_4.add(button_1);
+		
+		JPanel panel_1 = new JPanel();
+		contentPane.add(panel_1, BorderLayout.NORTH);
+	}
+
+}

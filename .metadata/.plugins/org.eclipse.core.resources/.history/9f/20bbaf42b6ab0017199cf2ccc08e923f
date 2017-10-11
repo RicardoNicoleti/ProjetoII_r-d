@@ -1,0 +1,64 @@
+package br.edu.facear.telas;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JDesktopPane;
+
+public class Tela_inicial extends JFrame {
+
+	private JPanel contentPane;
+
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Tela_inicial frame = new Tela_inicial();
+					frame.setExtendedState(MAXIMIZED_BOTH);
+
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	public Tela_inicial() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 1026, 917);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Seja Bem Vindo");
+		lblNewLabel.setBounds(642, 97, 88, 14);
+		contentPane.add(lblNewLabel);
+		
+		JButton btnNewButton_1 = new JButton("Ver Ranking");
+		btnNewButton_1.setBounds(568, 246, 230, 94);
+		contentPane.add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("Avaliar Pergunta");
+		btnNewButton_2.setBounds(568, 450, 230, 94);
+		contentPane.add(btnNewButton_2);
+		
+		JButton btnCadastrar = new JButton("Cadastrar perguntas");
+		btnCadastrar.setBounds(568, 345, 230, 94);
+		contentPane.add(btnCadastrar);
+		
+		JDesktopPane desktopPane = new JDesktopPane();
+		desktopPane.setBounds(162, 161, 1, 1);
+		contentPane.add(desktopPane);
+		
+		JButton btnNewButton = new JButton("Jogar");
+		btnNewButton.setBounds(568, 141, 230, 94);
+		contentPane.add(btnNewButton);
+	}
+}

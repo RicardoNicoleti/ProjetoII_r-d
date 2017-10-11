@@ -1,0 +1,88 @@
+package br.edu.facear.telas;
+
+import java.awt.EventQueue;
+import java.awt.Font;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.BorderLayout;
+import javax.swing.BoxLayout;
+import java.awt.FlowLayout;
+import javax.swing.SwingConstants;
+
+public class Tela_inicial extends JFrame {
+
+	private JPanel painel;
+
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Tela_inicial frame = new Tela_inicial();
+					frame.setExtendedState(MAXIMIZED_BOTH);
+
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	public Tela_inicial() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 722, 458);
+		painel = new JPanel();
+		painel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(painel);
+		painel.setLayout(new BoxLayout(painel, BoxLayout.Y_AXIS));
+		
+		JPanel panel1 = new JPanel();
+		painel.add(panel1);
+		
+		JLabel lblQuizByRd = new JLabel("Quiz by R&D");
+		panel1.add(lblQuizByRd);
+		lblQuizByRd.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		
+		JPanel panel2 = new JPanel();
+		painel.add(panel2);
+		
+		JLabel lblBemVindo = new JLabel("Seja Bem Vindo");
+		panel2.add(lblBemVindo);
+		
+		JPanel panel3 = new JPanel();
+		painel.add(panel3);
+		panel3.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 5));
+		
+		JButton btnAvaliar = new JButton("Avaliar Pergunta");
+		panel3.add(btnAvaliar);
+		btnAvaliar.setFont(new Font("Arial", Font.PLAIN, 16));
+		
+		JPanel panel4 = new JPanel();
+		painel.add(panel4);
+		panel4.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 5));
+		
+		JButton btnVerRanking = new JButton("Ver Ranking");
+		panel4.add(btnVerRanking);
+		btnVerRanking.setFont(new Font("Arial", Font.PLAIN, 16));
+		
+		JPanel panel5 = new JPanel();
+		panel5.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 5));
+		painel.add(panel5);
+		
+		JButton btnCadastrar = new JButton("Cadastrar perguntas");
+		panel5.add(btnCadastrar);
+		btnCadastrar.setFont(new Font("Arial", Font.PLAIN, 16));
+		
+		JPanel panel6 = new JPanel();
+		panel6.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 5));
+		painel.add(panel6);
+		
+		JButton btnJogar = new JButton("Jogar");
+		panel6.add(btnJogar);
+		btnJogar.setFont(new Font("Arial", Font.PLAIN, 16));
+	}
+}

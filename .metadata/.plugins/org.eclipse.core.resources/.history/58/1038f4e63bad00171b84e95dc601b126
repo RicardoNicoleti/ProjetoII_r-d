@@ -1,0 +1,94 @@
+package br.edu.facear.telas;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.Font;
+
+public class Login extends JFrame {
+
+	private JPanel painel;
+	private JTextField txtNome;
+	private JTextField txtSenha;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Login login = new Login();
+					login.setLocationRelativeTo(null);
+					login.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	public Login() {
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 470, 328);
+		painel = new JPanel();
+		painel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(painel);
+		painel.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(41, 55, 220, 30);
+		painel.add(panel);
+		
+		JLabel lblLogin = new JLabel("Login");
+		panel.add(lblLogin);
+		lblLogin.setFont(new Font("Arial", Font.PLAIN, 14));
+		
+		txtNome = new JTextField();
+		panel.add(txtNome);
+		txtNome.setColumns(20);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBounds(41, 96, 220, 31);
+		painel.add(panel_3);
+		
+		JLabel lblSenha = new JLabel("Senha");
+		panel_3.add(lblSenha);
+		lblSenha.setFont(new Font("Arial", Font.PLAIN, 14));
+		
+		txtSenha = new JTextField();
+		panel_3.add(txtSenha);
+		txtSenha.setColumns(20);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBounds(41, 148, 323, 42);
+		painel.add(panel_4);
+		
+		JButton btnEntrar = new JButton("Entrar");
+		panel_4.add(btnEntrar);
+		btnEntrar.setFont(new Font("Arial", Font.PLAIN, 12));
+		
+		JButton btnSair = new JButton("Sair");
+		panel_4.add(btnSair);
+		btnSair.setFont(new Font("Arial", Font.PLAIN, 12));
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBounds(48, 201, 286, 42);
+		painel.add(panel_5);
+		
+		JLabel lblCadastrar = new JLabel("Não é cadastrado");
+		panel_5.add(lblCadastrar);
+		lblCadastrar.setFont(new Font("Arial", Font.PLAIN, 14));
+		
+		JButton btnCadastrar = new JButton("Cadastre - se aqui");
+		panel_5.add(btnCadastrar);
+		btnCadastrar.setFont(new Font("Arial", Font.PLAIN, 12));
+	}
+}

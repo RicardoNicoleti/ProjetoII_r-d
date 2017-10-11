@@ -1,0 +1,74 @@
+package br.edu.facear.telas;
+
+import java.awt.EventQueue;
+import java.awt.Font;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.BorderLayout;
+import javax.swing.BoxLayout;
+
+public class Tela_inicial extends JFrame {
+
+	private JPanel painel;
+
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Tela_inicial frame = new Tela_inicial();
+					frame.setExtendedState(MAXIMIZED_BOTH);
+
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	public Tela_inicial() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 1218, 640);
+		painel = new JPanel();
+		painel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(painel);
+		painel.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		painel.add(panel, BorderLayout.CENTER);
+		
+		JLabel label = new JLabel("Seja Bem Vindo");
+		label.setBounds(646, 135, 73, 14);
+		panel.add(label);
+		
+		JLabel label_1 = new JLabel("Quiz by R&D");
+		label_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		label_1.setBounds(626, 69, 117, 55);
+		panel.add(label_1);
+		
+		JButton button = new JButton("Jogar");
+		button.setBounds(590, 194, 200, 46);
+		panel.add(button);
+		button.setFont(new Font("Arial", Font.PLAIN, 16));
+		
+		JButton button_1 = new JButton("Ranking");
+		button_1.setBounds(590, 264, 200, 44);
+		panel.add(button_1);
+		button_1.setFont(new Font("Arial", Font.PLAIN, 16));
+		
+		JButton button_2 = new JButton("Cadastrar perguntas");
+		button_2.setBounds(590, 335, 200, 44);
+		panel.add(button_2);
+		button_2.setFont(new Font("Arial", Font.PLAIN, 16));
+		
+		JButton button_3 = new JButton("AvaliarPerguntas");
+		button_3.setBounds(590, 400, 200, 44);
+		panel.add(button_3);
+		button_3.setFont(new Font("Arial", Font.PLAIN, 16));
+	}
+}
