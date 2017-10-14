@@ -1,0 +1,129 @@
+package br.edu.facear.telas;
+
+import java.awt.Font;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+public class Cadastrar extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JLabel label;
+	private JLabel label_1;
+	private JButton btnSair;
+
+	/**
+	 * Launch the application.
+	 */
+	public void Run(){
+		Cadastrar tela = new Cadastrar();
+		tela.setSize(1144, 762);
+		tela.setVisible(true);
+		tela.setLocationRelativeTo(null);
+		tela.setExtendedState(MAXIMIZED_BOTH);
+	
+	}
+
+	public Cadastrar() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 1218, 640);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Nome");
+		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+		lblNewLabel.setBounds(595, 143, 46, 14);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Login");
+		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 16));
+		lblNewLabel_1.setBounds(596, 183, 46, 21);
+		contentPane.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("Senha");
+		lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 16));
+		lblNewLabel_2.setBounds(596, 233, 46, 14);
+		contentPane.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("Confirmar Senha");
+		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 16));
+		lblNewLabel_3.setBounds(596, 277, 135, 14);
+		contentPane.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_4 = new JLabel("Telefone");
+		lblNewLabel_4.setFont(new Font("Arial", Font.PLAIN, 16));
+		lblNewLabel_4.setBounds(595, 323, 89, 14);
+		contentPane.add(lblNewLabel_4);
+		
+		JLabel lblNewLabel_5 = new JLabel("Idade");
+		lblNewLabel_5.setFont(new Font("Arial", Font.PLAIN, 16));
+		lblNewLabel_5.setBounds(598, 364, 46, 14);
+		contentPane.add(lblNewLabel_5);
+		
+		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.setFont(new Font("Arial", Font.PLAIN, 16));
+		btnCadastrar.setBounds(599, 419, 111, 34);
+		contentPane.add(btnCadastrar);
+		
+		textField = new JTextField();
+		textField.setBounds(594, 162, 234, 20);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(596, 202, 231, 20);
+		contentPane.add(textField_1);
+		textField_1.setColumns(10);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(596, 248, 230, 20);
+		contentPane.add(textField_2);
+		textField_2.setColumns(10);
+		
+		textField_3 = new JTextField();
+		textField_3.setBounds(597, 292, 231, 20);
+		contentPane.add(textField_3);
+		textField_3.setColumns(10);
+		
+		textField_4 = new JTextField();
+		textField_4.setBounds(596, 338, 133, 20);
+		contentPane.add(textField_4);
+		textField_4.setColumns(10);
+		
+		textField_5 = new JTextField();
+		textField_5.setBounds(598, 381, 46, 20);
+		contentPane.add(textField_5);
+		textField_5.setColumns(10);
+		
+		label = new JLabel("");
+		label.setBounds(275, 69, 46, 14);
+		contentPane.add(label);
+		
+		label_1 = new JLabel("Quiz by R&D");
+		label_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		label_1.setBounds(661, 28, 117, 55);
+		contentPane.add(label_1);
+		
+		btnSair = new JButton("Sair");
+		btnSair.setFont(new Font("Arial", Font.PLAIN, 16));
+		btnSair.setBounds(714, 420, 114, 33);
+		contentPane.add(btnSair);
+	
+	}
+}

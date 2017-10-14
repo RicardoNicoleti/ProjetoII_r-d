@@ -1,0 +1,32 @@
+package br.edu.facear.classes;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JLabel;
+import javax.swing.JRadioButton;
+
+public class JogoAtual implements ActionListener {
+	
+	private JLabel lblPontos, lblHorcrux, lblTempo, lblTempo1, lblLogo, lblJogador, lblJogador2, lblJogador_1, lblJogador_2, lblImg, lblPergunta;
+	private JRadioButton rdbtnAlternativa_1, rdbtnAlternativa_2, rdbtnAlternativa_3, rdbtnAlternativa_4;
+	
+
+
+	public JogoAtual(JLabel lblPergunta) {
+		this.lblPergunta = lblPergunta;
+	}
+
+	public void montar(){
+			
+		lblPergunta = new JLabel("Teste");
+		
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		montar();
+	}
+	
+}

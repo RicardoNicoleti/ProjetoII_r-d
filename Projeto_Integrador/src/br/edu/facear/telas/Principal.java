@@ -4,14 +4,8 @@ public class Principal {
 
 	public static void main(String[] args) {
 
-		Login login = new Login();
+		Tela_Login login = new Tela_Login();
 		login.Run();
-
-//		Tela_inicial tela = new Tela_inicial();
-//		tela.Run();
-			
-//		Jogo jogo = new Jogo();	
-//		jogo.Run();
 		
 	}
 }

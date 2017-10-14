@@ -14,30 +14,14 @@ public class Jogador {
 	private int telefone;
 	private int pontos;
 	private int nivel;
+	private String confirma;
 
-	
-	public String Logar() {
-			String ret = null;
-			List<Jogador> listaObjectJog = this.Ler();
-			for (Jogador jog1 : listaObjectJog) {
-				if(jog1.login.equals(this.login) && jog1.senha.equals(this.senha)){ 	
-					ret = "OK";
-					break;
-				}
-				else
-					ret = "ERRO";
-			}
-			return ret;		
-	}
-
-	public void Cadastrar() {
+	public Jogador(){
 
 	}
 
-	public Jogador() {
-	}
-
-	public Jogador(String nome, int idade, String login, String senha, int telefone, int pontos, int nivel) {
+	public Jogador(int id, String nome, int idade, String login, String senha, int telefone, int pontos, int nivel) {
+		this.id = id;
 		this.nome = nome;
 		this.idade = idade;
 		this.login = login;
@@ -46,7 +30,6 @@ public class Jogador {
 		this.pontos = pontos;
 		this.nivel = nivel;
 	}
-	
 
 	public Jogador(String nome) {
 		super();
@@ -117,20 +100,51 @@ public class Jogador {
 		this.nivel = nivel;
 	}
 
-	public void mostrar() {
-		System.out.println("ID:" + this.id + ";" + this.nome + ";" + this.idade + ";" + this.login + ";" + this.pontos
-				+ ";" + this.senha + ";" + this.telefone + ";" + this.nivel);
-
+	public String getConfirma() {
+		return confirma;
 	}
 
-	public void Gravar() {
+	public void setConfirma(String confirma) {
+		this.confirma = confirma;
+	}
 
-		String linha = this.id + ";" + this.nome + ";" + this.idade + ";" + this.login + ";" + this.pontos + ";"
-				+ this.senha + ";" + this.telefone + ";" + this.nivel;
-		Arquivo arq = new Arquivo();
-		arq.setNome("Jogo.txt");
-		arq.setTexto(linha);
-		arq.Gravar();
+	public String Logar() {
+		String ret = null;
+		List<Jogador> listaObjectJog = this.Ler();
+		for (Jogador jog1 : listaObjectJog) {
+			if (jog1.login.equals(this.login) && jog1.senha.equals(this.senha)) {
+				ret = "OK";
+				break;
+			} else
+				ret = "ERRO";
+		}
+		return ret;
+	}
+
+	public String Cadastrar() {
+		String ret = null;
+		if (this.senha.equals(this.confirma)) {
+			
+			List<Jogador> listaObjectJog = this.Ler();
+			for (Jogador jogador : listaObjectJog) {
+				if(jogador.id == jogador.id)
+					id++;
+			}
+				
+			String linha = this.id + ";" + this.nome + ";" + this.login + ";" + this.senha + ";" + this.telefone + ";"
+					+ this.idade + ";" + this.nivel + ";" + this.pontos;
+			Arquivo arq = new Arquivo();
+			arq.setNome("Jogador.txt");
+			arq.setTexto(linha);
+			arq.Gravar();
+			
+			ret = "OK";
+			
+		}
+		else
+			ret = "ERRO";
+			
+		return ret;
 
 	}
 
@@ -140,31 +154,25 @@ public class Jogador {
 
 		// recuperar a lista de strings do txt
 		Arquivo arq = new Arquivo();
-		arq.setNome("Jogo.txt");
+		arq.setNome("Jogador.txt");
 		List<String> lista = arq.Ler();
 
 		// percorrer a lista de strings
 		for (String linha : lista) {
 			// para cada linha
 			String[] vetdados = linha.split(";");
+
 			// -> adicionar em um objeto
 			Jogador jogador = new Jogador();
 			int id = Integer.parseInt(vetdados[0]); // Id
 			jogador.setId(id);
 			jogador.setNome(vetdados[1]); // Nome
-
-			int idade = Integer.parseInt(vetdados[2]);
+			jogador.setLogin(vetdados[2]);
+			jogador.setSenha(vetdados[3]);
+			int telefone = Integer.parseInt(vetdados[4]);
+			jogador.setTelefone(telefone);
+			int idade = Integer.parseInt(vetdados[5]);
 			jogador.setIdade(idade);
-			
-			jogador.setLogin(vetdados[3]);
-			
-			jogador.setSenha(vetdados[4]);
-			
-//			int telefone = Integer.parseInt(vetdados[4]);
-//			jogador.setTelefone(telefone);
-
-			int nivel = Integer.parseInt(vetdados[5]);
-			jogador.setNivel(nivel);
 
 			// -> adicionar na lista de retorno
 			listaRetorno.add(jogador);

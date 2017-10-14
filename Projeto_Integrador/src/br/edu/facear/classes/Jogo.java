@@ -1,7 +1,5 @@
 package br.edu.facear.classes;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class Jogo {
@@ -12,26 +10,15 @@ public class Jogo {
 	Random r = new Random();
 
 	public void Jogar() {
-		System.out.println(this.jogador.getNome() + " Jogando");
-		System.out.println(this.pergunta.getCategoria() + "\n"+ this.pergunta.getPergunta() + "\n" + this.pergunta.getAlternativas1() + "\n"
-				+ this.pergunta.getAlternativas2() + "\n" + this.pergunta.getAlternativas3() + "\n" + this.pergunta.getCorreta());
-
+		
+			
 	}
 
 	public void FazerPergunta() {
-		List<Pergunta> lista = new ArrayList<Pergunta>();
-		for (int i = 0; i < lista.size(); i++) {
-			randomizar(lista);
-		}
+
 
 	}
 
-	private void randomizar(List<Pergunta> lista) {
-		int index = r.nextInt(lista.size());
-
-		System.out.println(lista.get(index));
-
-	}
 
 	public void MostrarRanking() {
 		System.out.println("Mostrando ranking");
@@ -40,7 +27,7 @@ public class Jogo {
 	public void EscolherAdversario() {
 		System.out.println("Escolhendo adversario");
 	}
-
+	
 	public float getTempo() {
 		return tempo;
 	}
@@ -76,7 +63,7 @@ public class Jogo {
 	public Jogo() {
 
 	}
-
+	
 	public Jogo(float tempo, int vez, Jogador jogador, Pergunta pergunta) {
 		this.tempo = tempo;
 		this.vez = vez;

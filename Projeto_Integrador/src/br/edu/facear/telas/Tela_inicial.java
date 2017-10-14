@@ -2,14 +2,14 @@ package br.edu.facear.telas;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class Tela_inicial extends JFrame {
 
@@ -17,18 +17,17 @@ public class Tela_inicial extends JFrame {
 	private JPanel painel;
 	private JLabel lblBemVindo, lblLogo;
 	private JButton btnJogar, btnRanking, btnCadastrarPergunta, btnAvaliarPergunta ;
-
 	
-	public void Run(){
-		Tela_inicial tela = new Tela_inicial();
+	public void Run(String l){
+		Tela_inicial tela = new Tela_inicial(l);
 		tela.setSize(1144, 762);
 		tela.setVisible(true);
 		tela.setLocationRelativeTo(null);
 		tela.setExtendedState(MAXIMIZED_BOTH);
-	
+
 	}
 	
-	public Tela_inicial() {
+	public Tela_inicial(String l) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1218, 640);
 		painel = new JPanel();
@@ -40,8 +39,8 @@ public class Tela_inicial extends JFrame {
 		panel.setLayout(null);
 		painel.add(panel, BorderLayout.CENTER);
 		
-		lblBemVindo = new JLabel("Seja Bem Vindo");
-		lblBemVindo.setBounds(646, 135, 73, 14);
+		lblBemVindo = new JLabel("Bem vindo " + l);
+		lblBemVindo.setBounds(646, 135, 97, 14);
 		panel.add(lblBemVindo);
 		
 		lblLogo = new JLabel("Quiz by R&D");
@@ -52,8 +51,10 @@ public class Tela_inicial extends JFrame {
 		btnJogar = new JButton("Jogar");
 		btnJogar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Jogo jogo = new Jogo();
-				jogo.Run();
+				Tela_Jogo jogo = new Tela_Jogo();
+				String l = "Joao";
+				jogo.Run(l);
+				dispose();
 	
 			}
 		});
@@ -75,5 +76,7 @@ public class Tela_inicial extends JFrame {
 		btnAvaliarPergunta.setBounds(590, 400, 200, 44);
 		panel.add(btnAvaliarPergunta);
 		btnAvaliarPergunta.setFont(new Font("Arial", Font.PLAIN, 16));
+		
+
 	}
 }

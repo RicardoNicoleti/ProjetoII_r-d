@@ -1,0 +1,22 @@
+package br.edu.facear.telas;
+
+public class Principal {
+
+	public static void main(String[] args) {
+
+//		Tela_Login login = new Tela_Login();
+//		login.Run();
+	
+		int segundos = 20;
+		try{
+			for (int i = segundos; i > 0; i--){
+				System.out.println(i + " segundos");
+				Thread.sleep(1000); // 1 segundo
+			}
+			System.out.println("Terminei!");
+		} catch (InterruptedException e){
+			System.out.println("Interromperam meu sono!");
+		}
+		
+	}
+}

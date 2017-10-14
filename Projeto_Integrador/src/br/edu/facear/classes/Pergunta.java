@@ -1,5 +1,10 @@
 package br.edu.facear.classes;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import br.edu.facear.util.Arquivo;
+
 public class Pergunta {
 	
 	private int id;
@@ -11,7 +16,7 @@ public class Pergunta {
 	private String correta;
 	private Categoria categoria;
 	
-	
+
 	public void CadastrarPerguntas(){
 		
 		System.out.println("Pergunta cadastrada com sucesso!");
@@ -26,10 +31,53 @@ public class Pergunta {
 		System.out.println("Sorteando pergunta");
 	}
 	
-	public void ValidarPergunta(){
-		System.out.println("Pergunta validada com sucesso!");
+	public String ValidarPergunta(String resposta){
+			
+		String ret = null;
+		List<Pergunta> listaObjectPer = this.Ler();
+		for (Pergunta per : listaObjectPer) {
+			if (per.correta.equals(resposta)) {
+				ret = "OK";
+				break;
+			} else
+				ret = "ERRO";
+		}
+		return ret;
 		
 	}
+	
+	public List<Pergunta> Ler() {
+		// lista para retirnar do método
+		List<Pergunta> listaRetorno = new ArrayList<Pergunta>();
+
+		// recuperar a lista de strings do txt
+		Arquivo arq = new Arquivo();
+		arq.setNome("Pergunta.txt");
+		List<String> lista = arq.Ler();
+
+		// percorrer a lista de strings
+		for (String linha : lista) {
+			// para cada linha
+			String[] vetdados = linha.split(";");
+
+			// -> adicionar em um objeto
+			Pergunta pergunta = new Pergunta();
+			int id = Integer.parseInt(vetdados[0]); // Id
+			pergunta.setId(id);
+			pergunta.setPergunta(vetdados[1]);
+			pergunta.setCorreta(vetdados[2]); // Nome
+			pergunta.setAlternativas1(vetdados[3]);
+			pergunta.setAlternativas2(vetdados[4]);
+			pergunta.setAlternativas3(vetdados[5]);
+
+			// -> adicionar na lista de retorno
+			listaRetorno.add(pergunta);
+
+		}
+		return listaRetorno;
+
+	}
+
 	public Pergunta() {
 
 	
@@ -109,14 +157,5 @@ public class Pergunta {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
-	
-	@Override
-	public String toString() {
-		return "Pergunta id=" + id  + avaliacao + "\n" +   pergunta + "\n" 
-				+ alternativas1 + "\n" + alternativas2  + "\n" + alternativas3 +"\n"
-				+ correta;
-	}
-
-	
 	
 }
