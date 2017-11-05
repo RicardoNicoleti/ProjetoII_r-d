@@ -1,8 +1,11 @@
 package br.edu.facear.telas;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -29,21 +32,18 @@ public class Tela_Cadastrar extends JFrame {
 	private JTextField txtTelefone;
 	private JTextField txtIdade;
 	private JLabel label;
-	private JLabel lblLogo;
+	private JLabel lblLogo,lblLoginExistente;
 	private JButton btnSair;
 
-	/**
-	 * Launch the application.
-	 */
+	
 	public void Run(){
-		Tela_Cadastrar tela = new Tela_Cadastrar();
-		tela.setSize(1144, 762);
-		tela.setVisible(true);
-		tela.setLocationRelativeTo(null);
-		tela.setExtendedState(MAXIMIZED_BOTH);
+		this.setSize(1144, 762);
+		this.setVisible(true);
+		this.setLocationRelativeTo(null);
+		this.setExtendedState(MAXIMIZED_BOTH);
 	
 	}
-
+	
 	public Tela_Cadastrar() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1218, 640);
@@ -94,6 +94,7 @@ public class Tela_Cadastrar extends JFrame {
 				String confirma = txtConfirmarSenha.getText();
 				int telefone = Integer.parseInt(txtTelefone.getText());
 				int idade = Integer.parseInt(txtIdade.getText());
+				
 				
 				jogador.setNome(nome);
 				jogador.setLogin(login);
@@ -154,9 +155,32 @@ public class Tela_Cadastrar extends JFrame {
 		contentPane.add(lblLogo);
 		
 		btnSair = new JButton("Voltar");
+		btnSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 		btnSair.setFont(new Font("Arial", Font.PLAIN, 16));
 		btnSair.setBounds(714, 420, 114, 33);
 		contentPane.add(btnSair);
-	
+		
+		lblLoginExistente = new JLabel();
+		lblLoginExistente.setBounds(837, 205, 144, 14);
+		contentPane.add(lblLoginExistente);
+		
+		txtLogin.addFocusListener(new FocusAdapter() {
+            public void focusLost(FocusEvent evt) {
+            	String login = txtLogin.getText();
+            	Jogador jogador = new Jogador();
+            	jogador.setLogin(login);
+            	if(jogador.Existente().equals("OK")){
+            		lblLoginExistente.setText("Login existente");
+            		lblLoginExistente.setForeground(Color.RED);
+            	}else
+            		lblLoginExistente.setText("");
+                 
+            }
+        });
+		
 	}
 }

@@ -24,10 +24,9 @@ public class Tela_Login extends JFrame {
 
 	
 	public void Run(){
-		Tela_Login tela = new Tela_Login();
-		tela.setSize(437, 302);
-		tela.setVisible(true);
-		tela.setLocationRelativeTo(null);
+		this.setSize(437, 302);
+		this.setVisible(true);
+		this.setLocationRelativeTo(null);
 	}
 	
 	public Tela_Login() {
@@ -85,14 +84,12 @@ public class Tela_Login extends JFrame {
 				jogador.setLogin(login);
 				jogador.setSenha(senha);
 				if(jogador.Logar().equals("OK")){
-					String l = jogador.getLogin();
-					Tela_inicial tela = new Tela_inicial(l);
-					tela.Run(l);
+					Tela_inicial tela = new Tela_inicial();
+					tela.Run();
 					dispose();
 				}
 				else
-					JOptionPane.showMessageDialog(null,"Login ou senha Inválido");
-						
+					JOptionPane.showMessageDialog(null,"Login ou senha Inválido");		
 			}
 		});
 		btnEntrar.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -113,5 +110,7 @@ public class Tela_Login extends JFrame {
 		lblCadastrar.setBounds(103, 194, 112, 17);
 		painel.add(lblCadastrar);
 		lblCadastrar.setFont(new Font("Arial", Font.PLAIN, 14));
+	
+		getRootPane().setDefaultButton(btnEntrar);
 	}
 }

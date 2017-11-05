@@ -15,27 +15,42 @@ public class Jogador {
 	private int pontos;
 	private int nivel;
 	private String confirma;
-
+	private static Jogador logado;
+	
+	
 	public Jogador(){
-
+		
 	}
-
-	public Jogador(int id, String nome, int idade, String login, String senha, int telefone, int pontos, int nivel) {
-		this.id = id;
+	
+	
+	
+	public Jogador(String nome, int pontos) {
+		super();
 		this.nome = nome;
-		this.idade = idade;
-		this.login = login;
-		this.senha = senha;
-		this.telefone = telefone;
 		this.pontos = pontos;
-		this.nivel = nivel;
 	}
 
+	public static Jogador getInstance() {
+		if (logado == null) {
+			logado = new Jogador();
+		}
+		return logado;
+	}
+	
 	public Jogador(String nome) {
 		super();
 		this.nome = nome;
 	}
+	
+	public static Jogador getLogado() {
+		return logado;
+	}
 
+
+	public static void setLogado(Jogador logado) {
+		Jogador.logado = logado;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -112,7 +127,21 @@ public class Jogador {
 		String ret = null;
 		List<Jogador> listaObjectJog = this.Ler();
 		for (Jogador jog1 : listaObjectJog) {
-			if (jog1.login.equals(this.login) && jog1.senha.equals(this.senha)) {
+			if (jog1.login.equals(this.login) && jog1.senha.equals(this.senha)) {	
+				Jogador.setLogado(this.Ler(jog1.id));
+				ret = "OK";
+				break;
+			} else
+				ret = "ERRO";
+		}
+		return ret;
+	}
+	
+	public String Existente() {
+		String ret = null;
+		List<Jogador> listaObjectJog = this.Ler();
+		for (Jogador jog1 : listaObjectJog) {
+			if (jog1.login.equals(this.login)) {				
 				ret = "OK";
 				break;
 			} else
@@ -149,7 +178,7 @@ public class Jogador {
 	}
 
 	public List<Jogador> Ler() {
-		// lista para retirnar do método
+		// lista para retornar do método
 		List<Jogador> listaRetorno = new ArrayList<Jogador>();
 
 		// recuperar a lista de strings do txt
@@ -173,7 +202,9 @@ public class Jogador {
 			jogador.setTelefone(telefone);
 			int idade = Integer.parseInt(vetdados[5]);
 			jogador.setIdade(idade);
-
+			int pontos = Integer.parseInt(vetdados[6]); // Id
+			jogador.setPontos(pontos);
+			
 			// -> adicionar na lista de retorno
 			listaRetorno.add(jogador);
 
@@ -181,4 +212,18 @@ public class Jogador {
 		return listaRetorno;
 
 	}
+	
+	//Buscar
+	public Jogador Ler(int ID){
+		Jogador jogadorRetorno = null;
+		Jogador jog = new Jogador();
+		List<Jogador> listaObjectJog = jog.Ler();
+		for (Jogador jog1 : listaObjectJog) {
+			if(jog1.getId() == ID)
+				jogadorRetorno = jog1;
+		}
+		return jogadorRetorno;
+
+	}
+	
 }

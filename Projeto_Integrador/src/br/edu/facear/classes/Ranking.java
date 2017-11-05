@@ -1,16 +1,15 @@
 package br.edu.facear.classes;
 
-public class Ranking {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class Ranking implements Comparator<Jogador> {
 	private int semanal;
 	private int mensal;
 	private Jogador jogador;
-	
-	public void GerenciarRanking(){
-		
-		System.out.println(this.jogador.getNome()+ " " + this.jogador.getPontos()+" " + this.jogador.getNivel());
-		
-	}
-	
+
 	public Ranking() {
 
 	}
@@ -19,15 +18,19 @@ public class Ranking {
 		this.semanal = semanal;
 		this.mensal = mensal;
 	}
+
 	public int getSemanal() {
 		return semanal;
 	}
+
 	public void setSemanal(int semanal) {
 		this.semanal = semanal;
 	}
+
 	public int getMensal() {
 		return mensal;
 	}
+
 	public void setMensal(int mensal) {
 		this.mensal = mensal;
 	}
@@ -39,6 +42,26 @@ public class Ranking {
 	public void setJogador(Jogador jogador) {
 		this.jogador = jogador;
 	}
-	
-	
+
+	public List<Jogador> GerenciarRanking() {
+		List<Jogador> listaRetorno = new ArrayList<Jogador>();
+
+		jogador = new Jogador();
+		List<Jogador> listaObjectJog = jogador.Ler();
+		for (Jogador jogador : listaObjectJog) {
+
+			listaRetorno.add(jogador);
+
+		}
+		
+		return listaRetorno;
+	}
+
+	@Override
+	public int compare(Jogador um, Jogador dois) {
+
+		return dois.getPontos() - um.getPontos();
+
+	}
+
 }

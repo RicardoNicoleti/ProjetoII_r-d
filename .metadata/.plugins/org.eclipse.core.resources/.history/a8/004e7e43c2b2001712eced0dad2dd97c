@@ -1,0 +1,20 @@
+package br.edu.facear.telas;
+
+import javax.swing.JOptionPane;
+
+public class Principal {
+
+	public static void main(String[] args) {
+
+//		Tela_Login login = new Tela_Login();
+//		login.Run();
+		
+		
+		 String CEP = "12345678";
+	        System.out.println(CEP.substring(0, 5) + "-" + CEP.substring(5));
+	        String TEL = "1234567890123";
+	       JOptionPane.showMessageDialog(null,"(" + TEL.substring(0, 3) + ")" + TEL.substring(2, 6) + "-" + TEL.substring(6, 10));
+		
+		
+	}
+}

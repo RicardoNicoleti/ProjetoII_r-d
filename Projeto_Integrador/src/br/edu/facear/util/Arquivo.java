@@ -62,7 +62,6 @@ public class Arquivo {
 			System.out.println("Erro ao Gravar o arquivo: "+e.getMessage());
 		}
 		
-		System.out.println("GRAVOU");
 		return true;
 	}
 	public List<String> Ler(){
