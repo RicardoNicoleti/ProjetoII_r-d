@@ -1,14 +1,26 @@
 package br.edu.facear.util;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Arquivo {
 	//Atributos
 	private String diretorio;
 	private String nome;
 	private String texto;
+	private boolean acrescentar;
 	
+	public boolean isAcrescentar() {
+		return acrescentar;
+	}
+	public void setAcrescentar(boolean acrescentar) {
+		this.acrescentar = acrescentar;
+	}
 	//Get e Set
 	public String getDiretorio(){
 		return this.diretorio;
@@ -30,12 +42,14 @@ public class Arquivo {
 	}	
 	//Construtor
 	public Arquivo(){
-		this.diretorio = "C:\\Users\\ricar\\Desktop\\ProjetoII_r-d\\Projeto_Integrador";		
+		this.diretorio = "C:\\Users\\ricar\\Desktop\\ProjetoII_r-d\\Projeto_Integrador";
+		this.acrescentar = true;
 	}
-	public Arquivo(String dir, String nome, String texto){
+	public Arquivo(String dir, String nome, String texto, boolean acrescentar){
 		this.diretorio = dir;
 		this.nome = nome;
 		this.texto = texto;
+		this.acrescentar = acrescentar;
 	}	
 	
 	public boolean Gravar(){
@@ -44,9 +58,8 @@ public class Arquivo {
 		File arq = new File(dir, this.nome);
 		
 		try{
-			arq.createNewFile();
 			
-			boolean acrescentar = true;
+			arq.createNewFile();			
 			
 			FileWriter fw = new FileWriter(arq, acrescentar);
 			
@@ -83,12 +96,11 @@ public class Arquivo {
 			
 		}
 		catch (Exception e){
-			System.out.println("Erro ao Gravar o arquivo: "+e.getMessage());
+			System.out.println("Erro ao Ler o arquivo: "+e.getMessage());
 		}		
 		
 		return lista;
-		
-		
+	
 	}	
 
 }

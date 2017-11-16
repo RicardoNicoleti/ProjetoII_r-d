@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,6 +27,7 @@ public class Tela_Ranking extends JFrame {
 	
 	private JPanel contentPane;
 	private JTable tblSemana;
+	private Ranking ranking;
 
 	public void Run() {
 		this.setSize(1144, 762);
@@ -38,7 +38,6 @@ public class Tela_Ranking extends JFrame {
 	}
 	
 	public void preencherTabela() {
-		Jogador j = new Jogador();
 		if (tblSemana != null) {
 			DefaultTableModel modelo = (DefaultTableModel) tblSemana.getModel();
 			if (modelo.getRowCount() > 0) {
@@ -46,8 +45,8 @@ public class Tela_Ranking extends JFrame {
 			}
 	
 			try {
-				Ranking r = new Ranking();
-				List<Jogador> lista =  r.GerenciarRanking();
+				ranking = new Ranking();
+				List<Jogador> lista =  ranking.GerenciarRanking();
 				Collections.sort(lista, new Ranking());
 				for (int i = 0; i < lista.size(); i++) {
 					Object[] linha = new Object[2];
@@ -63,7 +62,6 @@ public class Tela_Ranking extends JFrame {
 		}
 
 	}
-	
 	
 	public Tela_Ranking() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -16,20 +16,11 @@ public class Pergunta {
 	private String alternativas3;
 	private String autor;
 	private Categoria categoria;
-	private int perguntasFeitas;
 
 	public Pergunta() {
 
 	}
 	
-
-	public int getPerguntasFeitas() {
-		return perguntasFeitas;
-	}
-
-	public void setPerguntasFeitas(int perguntasFeitas) {
-		this.perguntasFeitas = perguntasFeitas;
-	}
 
 	public int getId() {
 		return id;
@@ -110,10 +101,6 @@ public class Pergunta {
 
 	}
 
-	public void SortearPerguntas() {
-
-	}
-
 	public String ValidarPergunta(String resposta) {
 
 		String ret = null;
@@ -158,8 +145,13 @@ public class Pergunta {
 			Pergunta pergunta = new Pergunta();
 			int id = Integer.parseInt(vetdados[0]); // Id
 			pergunta.setId(id);
-			Categoria categoria = Categoria.valueOf(vetdados[1]);
+			
+			int idCat = Integer.parseInt(vetdados[1]);
+			Categoria categoria = new Categoria();
+			categoria.setId(idCat);	
+			
 			pergunta.setCategoria(categoria);
+			
 			pergunta.setPergunta(vetdados[2]);
 			pergunta.setCorreta(vetdados[3]); // Nome
 			pergunta.setAlternativas1(vetdados[4]);
@@ -174,21 +166,24 @@ public class Pergunta {
 		return listaRetorno;
 
 	}
-	public String CadastrarPergunta() {
+	public String Cadastrar(boolean acrescentar) {
 		String ret = null;
-		List<Pergunta> listaObjectPer = this.Ler();
-		for (Pergunta pergunta : listaObjectPer) {
-			if (pergunta.id == pergunta.id)
-				id++;
+		
+		
+		if (acrescentar) {
+			List<Pergunta> listaPergunta = Ler();
+			this.setId(listaPergunta.size());
+
 		}
 
 		try {
-			String linha = this.id + ";" + this.categoria + ";" + this.pergunta + ";" + this.correta + ";"
+			String linha = this.id + ";" + this.categoria.getId() + ";" + this.pergunta + ";" + this.correta + ";"
 					+ this.alternativas1 + ";" + this.alternativas2 + ";" + this.alternativas3 + ";" + this.autor;
 			Arquivo arq = new Arquivo();
 			arq.setNome("Pergunta.txt");
 			
 			arq.setTexto(linha);
+			arq.setAcrescentar(acrescentar);
 			arq.Gravar();
 			ret = "OK";
 		} catch (Exception e1) {
@@ -198,23 +193,5 @@ public class Pergunta {
 		return ret;
 
 	}
-	
-	public String CadastrarPerguntaFeita() {
-		String ret = null;
-		try {
-			String linha = this.perguntasFeitas + ";";
-			Arquivo arq = new Arquivo();
-			arq.setNome("PerguntasFeitas.txt");
-			
-			arq.setTexto(linha);
-			arq.Gravar();
-			ret = "OK";
-		} catch (Exception e1) {
-			ret = "ERRO";
-		}
 
-		return ret;
-
-	}
-	
 }

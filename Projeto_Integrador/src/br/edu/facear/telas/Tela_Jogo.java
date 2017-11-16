@@ -21,7 +21,6 @@ import javax.swing.border.EmptyBorder;
 
 import br.edu.facear.classes.Jogador;
 import br.edu.facear.classes.Jogo;
-import br.edu.facear.classes.Pergunta;
 
 public class Tela_Jogo extends JFrame {
 
@@ -31,32 +30,50 @@ public class Tela_Jogo extends JFrame {
 	private JLabel lblPontos, lblHorcrux, lblTempo, lblTempo1, lblLogo, lblJogador, lblJogador2, lblJogador_1,
 			lblJogador_2, lblImg, lblPergunta, lblVez, lblPontoGanho;
 	private JRadioButton rdbtnAlternativa_1, rdbtnAlternativa_2, rdbtnAlternativa_3, rdbtnAlternativa_4;
+	private JButton btnConfirmar, btnPedirAjuda, btnSair;
 	private Thread conta;
 	private Jogo jogo;
 	private ButtonGroup bg;
+	private JLabel lblRodada;
 
 	public void Run() {
 		this.setSize(1144, 762);
 		this.setVisible(true);
 		this.setExtendedState(MAXIMIZED_BOTH);
 	}
-	
+
 	public void ComecarJogo() {
 		jogo = new Jogo();
-		lblJogador_2.setText(jogo.getJogador2().getLogin().toUpperCase());
-		jogo.setJogadorVez(jogo.getJogador1());
-		
-		lblJogador_1.setForeground(Color.red);
-		lblJogador_2.setForeground(Color.black);
-		
-		String ponto = Integer.toString(jogo.getJogador2().getPontos());
-		
-		lblPontoGanho.setText(ponto);
 
-		carregarPergunta();
+		buscarJogos();
+
+//		jogo.Jogar();
+
+//		
+//		String ponto = Integer.toString(jogo.getJogador1().getPontos());
+//
+//		lblPontoGanho.setText(ponto);
+
+		if (!jogo.isJogoAnterior()){
+			jogo.EscolherAdversario();
+			
+			lblJogador_1.setText(jogo.getJogador1().getLogin().toUpperCase());
+
+			lblJogador_2.setText(jogo.getJogador2().getLogin().toUpperCase());
+			jogo.setJogadorVez(jogo.getJogador1());
 		
-	}
-	
+			lblJogador_1.setForeground(Color.red);
+			lblJogador_2.setForeground(Color.black);
+			
+			carregarPergunta();
+			
+		}else
+			perguntaJogoAnterior();
+		
+		jogo.SalvarJogo();
+
+		}
+
 	public void Contar() {
 		conta = new Thread() {
 			public void run() {
@@ -64,7 +81,7 @@ public class Tela_Jogo extends JFrame {
 				int i;
 				int t = 2;
 				try {
-					while(t != -1){
+					while (t != -1) {
 						for (i = segundos; i >= 0; i--) {
 							lblTempo1.setText(String.format("%02d:%02d", t, i));
 							Thread.sleep(1000); // 1 segundo
@@ -72,7 +89,7 @@ public class Tela_Jogo extends JFrame {
 						t--;
 					}
 				} catch (InterruptedException e) {
-					System.out.println("Erro ao iniciar " + e);
+					// System.out.println("Erro ao iniciar " + e);
 				}
 			}
 		};
@@ -88,31 +105,100 @@ public class Tela_Jogo extends JFrame {
 			resposta = rdbtnAlternativa_3.getText();
 		else if (rdbtnAlternativa_4.isSelected())
 			resposta = rdbtnAlternativa_4.getText();
-		
+
 		String retirarTag = "<[^>]+>";
 		String res = resposta.replaceAll(retirarTag, "");
-		
+
 		if (jogo.getPergunta().ValidarPergunta(res).equals("OK")) {
-			JOptionPane.showMessageDialog(null, "correta");		
+			JOptionPane.showMessageDialog(null, "correta");
+			jogo.PerguntaFeitas();
 		} else {
 			JOptionPane.showMessageDialog(null, "errada");
-			if(jogo.getJogadorVez().getId() == jogo.getJogador1().getId()){
+			if (jogo.getJogadorVez().getId() == jogo.getJogador1().getId()) {
 				jogo.setJogadorVez(jogo.getJogador2());
 				lblJogador_1.setForeground(Color.black);
 				lblJogador_2.setForeground(Color.red);
 				lblVez.setText("JOGADOR 2");
-			}else{
+				jogo.PerguntaFeitas();
+			} else {
 				jogo.setJogadorVez(jogo.getJogador1());
 				lblJogador_2.setForeground(Color.black);
 				lblJogador_1.setForeground(Color.red);
 				lblVez.setText("JOGADOR 1");
+				jogo.PerguntaFeitas();
 				carregarPergunta();
+
 			}
 		}
 	}
 
+	public void buscarJogos() {
+		jogo = new Jogo();
+		List<Jogo> lista = jogo.Ler();
+		for (Jogo jogo2 : lista) {
+			if (Jogador.getInstance().getId() == jogo2.getJogador1().getId()) {
+				if (!jogo2.isFinalizado()) {
+					int result = JOptionPane.showConfirmDialog(null, "Deseja Retomar o jogo anterior ? ", "Sim",
+							JOptionPane.YES_NO_OPTION);
+					if (result == JOptionPane.YES_OPTION) {
+						System.out.println("Jogo anterior");
+						jogo.setId(jogo2.getId());
+						jogo.CarregarJogo();
+						jogo.setJogoAnterior(true);
+					} else {
+						System.out.println("Novo Jogo");
+						jogo.setId(jogo2.getId());
+						jogo.FinalizarJogo();
+					}
+				}
+			}
+		}
+	}
 
-	
+	public void perguntaJogoAnterior() {
+		
+		jogo.CarregarJogo();
+		
+		if (jogo.getJogadorVez().getId() == Jogador.getInstance().getId()) {
+			jogo.setJogadorVez(jogo.getJogador1());
+			lblJogador_1.setText(jogo.getJogador1().getLogin().toUpperCase());
+			lblJogador_2.setForeground(Color.red);
+			lblJogador_1.setForeground(Color.black);
+			lblVez.setText("JOGADOR 1");
+			lblJogador_2.setText(jogo.getJogador2().getLogin().toUpperCase());
+			lblJogador_1.setForeground(Color.red);
+			lblJogador_2.setForeground(Color.black);
+			lblVez.setText("JOGADOR 2");
+			System.out.println(jogo.getJogadorVez().getId()); 
+		} else {
+			lblJogador_2.setText(jogo.getJogador2().getLogin().toUpperCase());
+			jogo.setJogadorVez(jogo.getJogador2());
+			lblJogador_1.setForeground(Color.black);
+			lblJogador_2.setForeground(Color.red);
+			lblVez.setText("JOGADOR 2");
+			lblJogador_1.setText(jogo.getJogador1().getLogin().toUpperCase());
+			lblJogador_2.setForeground(Color.red);
+			lblJogador_1.setForeground(Color.black);
+			lblVez.setText("JOGADOR 1");
+			System.out.println(jogo.getJogadorVez().getId()); 
+		
+		}
+		
+		lblPergunta.setText("<html><b>" + jogo.getPergunta().getPergunta() + "<br></html>");
+
+		List<String> escolhas = Arrays.asList(jogo.getPergunta().getAlternativas1(),
+				jogo.getPergunta().getAlternativas2(), jogo.getPergunta().getAlternativas3(),
+				jogo.getPergunta().getCorreta());
+
+		Collections.shuffle(escolhas);
+
+		rdbtnAlternativa_1.setText("<html><b>" + escolhas.get(0) + "<br></html>");
+		rdbtnAlternativa_2.setText("<html><b>" + escolhas.get(1) + "<br></html>");
+		rdbtnAlternativa_3.setText("<html><b>" + escolhas.get(2) + "<br></html>");
+		rdbtnAlternativa_4.setText("<html><b>" + escolhas.get(3) + "<br></html>");
+						
+	}
+
 	public void carregarPergunta() {
 
 		jogo.EscolherPergunta();
@@ -124,18 +210,14 @@ public class Tela_Jogo extends JFrame {
 				jogo.getPergunta().getCorreta());
 
 		Collections.shuffle(escolhas);
-		
+
 		rdbtnAlternativa_1.setText("<html><b>" + escolhas.get(0) + "<br></html>");
 		rdbtnAlternativa_2.setText("<html><b>" + escolhas.get(1) + "<br></html>");
 		rdbtnAlternativa_3.setText("<html><b>" + escolhas.get(2) + "<br></html>");
 		rdbtnAlternativa_4.setText("<html><b>" + escolhas.get(3) + "<br></html>");
-			
-		
-//		Pergunta pergunta = new Pergunta();
-//		pergunta.setPerguntasFeitas(jogo.getPergunta().getId());
-//		jogo.Cadastrar();
-		
+
 	}
+
 	public Tela_Jogo() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1144, 762);
@@ -187,13 +269,12 @@ public class Tela_Jogo extends JFrame {
 		lblJogador2.setBounds(955, 239, 120, 112);
 		panel.add(lblJogador2);
 
-		JButton btnSair = new JButton("Sair");
+		btnSair = new JButton("Sair");
 		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Tela_inicial tela = new Tela_inicial();
 				tela.Run();
-
-				 conta.interrupt();
+				conta.interrupt();
 				dispose();
 			}
 		});
@@ -225,8 +306,7 @@ public class Tela_Jogo extends JFrame {
 		bg.add(rdbtnAlternativa_2);
 		bg.add(rdbtnAlternativa_3);
 		bg.add(rdbtnAlternativa_4);
-		
-		
+
 		lblPontoGanho = new JLabel();
 		lblPontoGanho.setBounds(284, 57, 46, 14);
 		panel.add(lblPontoGanho);
@@ -235,7 +315,7 @@ public class Tela_Jogo extends JFrame {
 		lblPontoHorc.setBounds(284, 88, 46, 14);
 		panel.add(lblPontoHorc);
 
-		lblJogador_1 = new JLabel(Jogador.getInstance().getLogin().toUpperCase());
+		lblJogador_1 = new JLabel();
 		lblJogador_1.setBounds(262, 362, 75, 14);
 		panel.add(lblJogador_1);
 
@@ -248,33 +328,42 @@ public class Tela_Jogo extends JFrame {
 		lblImg.setBounds(543, 86, 70, 64);
 		panel.add(lblImg);
 
-		JButton btnPedirAjuda = new JButton("Pedir Ajuda");
+		btnPedirAjuda = new JButton("Pedir Ajuda");
+		btnPedirAjuda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+			}
+		});
 		btnPedirAjuda.setBounds(513, 510, 105, 38);
 		panel.add(btnPedirAjuda);
 
-		JButton btnConfirmar = new JButton("Confirmar");
+		btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-					verificarResposta();
-					carregarPergunta();
-					bg.clearSelection();
-					conta.interrupt();
-					Contar();
+				verificarResposta();
+				carregarPergunta();
+				jogo.SalvarRodada();
+				bg.clearSelection();
+				conta.interrupt();
+				Contar();
+
 			}
 		});
 
-		ComecarJogo();
+		lblRodada = new JLabel("rodada");
+		lblRodada.setBounds(705, 153, 46, 14);
+		panel.add(lblRodada);
 
 		btnConfirmar.setBounds(628, 510, 107, 38);
 		panel.add(btnConfirmar);
 
 		lblVez = new JLabel("Vez");
-		lblVez.setBounds(616, 153, 144, 14);
+		lblVez.setBounds(616, 153, 62, 14);
 		panel.add(lblVez);
 
-		Contar();
 		lblVez.setText("JOGADOR 1");
+		ComecarJogo();
+		Contar();
 
 	}
-
 }

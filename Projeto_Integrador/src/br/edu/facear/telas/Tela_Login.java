@@ -21,6 +21,7 @@ public class Tela_Login extends JFrame {
 	private JPanel painel;
 	private JTextField txtLogin;
 	private JTextField txtSenha;
+	private Jogador jogador;
 
 	
 	public void Run(){
@@ -78,7 +79,7 @@ public class Tela_Login extends JFrame {
 		painel.add(btnEntrar);
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Jogador jogador = new Jogador();
+				jogador = new Jogador();
 				String login = txtLogin.getText();
 				String senha = txtSenha.getText();
 				jogador.setLogin(login);

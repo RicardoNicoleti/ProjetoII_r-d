@@ -1,25 +1,92 @@
 package br.edu.facear.classes;
 
-public enum Categoria {
-		Geografia("Geografia"),
-		História("História"),
-		Ciências("Ciências"),
-		Programação("Programação"),
-		Games("Games"),
-		Atualidades("Atualidades");
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
 
-	    private String categoria;
-	    
-	    private Categoria(String categoria) {
-			this.categoria = categoria;
-		}
-	    
-	    public String getCategoria() {
-			return this.categoria;
-		}
-	    
-	    @Override
-	    public String toString() {
-	    	return this.categoria;
-	    }
+public class Categoria {
+	private int id;
+	private String categoria;
+
+	public int getId() {
+		return id;
 	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getCategoria() {
+		return categoria;
+	}
+	
+	
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
+	
+	
+	
+	public Categoria() {
+
+	}
+
+	public Categoria(int id, String categoria) {
+		setId(id);
+		setCategoria(categoria);
+	}
+	
+	public List<Categoria> Ler(){
+		
+		List<Categoria> listaRetorno = new ArrayList<Categoria>();
+		
+		
+		listaRetorno.add(new Categoria(1, "Ciências"));
+		listaRetorno.add(new Categoria(2, "Programação"));
+		listaRetorno.add(new Categoria(3, "História"));
+		listaRetorno.add(new Categoria(4, "Games"));
+		listaRetorno.add(new Categoria(5, "Geografia"));
+		listaRetorno.add(new Categoria(6, "Atualidades"));
+		
+		return listaRetorno;
+	}
+	
+	public Vector<Categoria> listaCategoria(){
+		
+		Vector<Categoria> vetorRetorno = new Vector<Categoria>();
+		
+		List<Categoria> lista = Ler();
+		
+		for (Categoria categoria : lista) {
+			vetorRetorno.addElement(categoria);
+			
+		}
+		
+		return vetorRetorno;
+	}
+	
+	public Vector<Categoria> listaCategoria(int id){
+		
+		Vector<Categoria> vetorRetorno = new Vector<Categoria>();
+		
+		List<Categoria> lista = Ler();
+		
+		for (Categoria categoria : lista) {
+			if(categoria.getId() == id)
+				vetorRetorno.addElement(categoria);
+			
+		}
+		
+		return vetorRetorno;
+	}
+	
+	
+	@Override
+	public String toString() {
+		return categoria;
+	}
+	
+	
+	
+	
+}

@@ -26,6 +26,7 @@ public class Tela_Cadastrar_Pergunta extends JFrame {
 	
 	private JPanel contentPane;
 	private JLabel lblUsuario;
+	private Pergunta pergunta;
 
 	public void Run(){
 		this.setSize(1144, 762);
@@ -56,11 +57,11 @@ public class Tela_Cadastrar_Pergunta extends JFrame {
 		
 		JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		comboBox.setModel(new DefaultComboBoxModel(Categoria.values()));
+		comboBox.setModel(new DefaultComboBoxModel(new Categoria().listaCategoria()));
 		comboBox.setBounds(536, 142, 289, 20);
 		contentPane.add(comboBox);
 		
-		JLabel lblQuestao = new JLabel("Digite a quest\u00E3o:");
+		JLabel lblQuestao = new JLabel("Digite a Pergunta:");
 		lblQuestao.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblQuestao.setBounds(536, 166, 131, 20);
 		contentPane.add(lblQuestao);
@@ -115,7 +116,7 @@ public class Tela_Cadastrar_Pergunta extends JFrame {
 		btnSalvar.setForeground(new Color(0, 0, 0));
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Pergunta pergunta = new Pergunta();
+				pergunta = new Pergunta();
 				
 				String questao = txtAPergunta.getText();
 				String correta = txtACorreta.getText(); 
@@ -132,7 +133,7 @@ public class Tela_Cadastrar_Pergunta extends JFrame {
 				pergunta.setAlternativas3(incorreta3);
 				pergunta.setAutor(autor);
 				
-				if(pergunta.CadastrarPergunta().equals("OK")) {
+				if(pergunta.Cadastrar(true).equals("OK")) {
 					JOptionPane.showMessageDialog(null, "Cadastrado com sucesso");
 					
 				}else {
@@ -156,11 +157,13 @@ public class Tela_Cadastrar_Pergunta extends JFrame {
 		contentPane.add(btnCancelar);
 		
 		JLabel lblAutor = new JLabel("Autor:");
-		lblAutor.setBounds(535, 102, 46, 14);
+		lblAutor.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblAutor.setBounds(535, 89, 46, 27);
 		contentPane.add(lblAutor);
 		
-		lblUsuario = new JLabel(Jogador.getInstance().getLogin());
-		lblUsuario.setBounds(928, 22, 64, 14);
+		lblUsuario = new JLabel(Jogador.getInstance().getLogin().toUpperCase());
+		lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblUsuario.setBounds(587, 89, 238, 27);
 		contentPane.add(lblUsuario);
 		
 	}

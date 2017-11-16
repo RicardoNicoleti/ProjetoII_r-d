@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import br.edu.facear.classes.Categoria;
 import br.edu.facear.classes.Pergunta;
 
 public class Tela_Avaliar extends JFrame {
@@ -34,15 +35,19 @@ public class Tela_Avaliar extends JFrame {
 	}
 
 	public void EscolherPerguntas(int id) {
-
+		
+		
 		Pergunta pergunta = new Pergunta();
+		Categoria categoria = new Categoria();
+//		pergunta.setCategoria(categoria.listaCategoria(id));
 		List<Pergunta> listaObjectPerg = pergunta.Ler();
-
 		for (Pergunta pergunta2 : listaObjectPerg) {
-
+			
 			if (pergunta2.getId() == id) {
+				
 				lblPergunta.setText("<html><b>" + pergunta2.getPergunta() + "<br></html>");
-
+//				lblCategoria.setText(categoria.listaCategoria(id));
+//				lblCategoria.setText(categoria.listaCategoria(pergunta));
 				lblAlternativa_1.setText("<html><b>" + "1 - " + pergunta2.getAlternativas1() + "<br></html>");
 				lblAlternativa_2.setText("<html><b>" + "2 - " + pergunta2.getAlternativas2() + "<br></html>");
 				lblAlternativa_3.setText("<html><b>" + "3 - " +  pergunta2.getAlternativas3() + "<br></html>");
