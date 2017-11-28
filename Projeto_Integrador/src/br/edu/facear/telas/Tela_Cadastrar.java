@@ -17,6 +17,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import br.edu.facear.classes.Jogador;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
 
 public class Tela_Cadastrar extends JFrame {
 
@@ -32,6 +34,7 @@ public class Tela_Cadastrar extends JFrame {
 	private JLabel lblLogo,lblLoginExistente;
 	private JButton btnSair;
 	private Jogador jogador;
+	private JLabel lblFundo;
 
 	
 	public void Run(){
@@ -39,10 +42,12 @@ public class Tela_Cadastrar extends JFrame {
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 		this.setExtendedState(MAXIMIZED_BOTH);
+		this.setResizable(false);
 	
 	}
 	
 	public Tela_Cadastrar() {
+		setTitle("Cadastrar Jogador");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1218, 640);
 		contentPane = new JPanel();
@@ -81,6 +86,7 @@ public class Tela_Cadastrar extends JFrame {
 		contentPane.add(lblIdade);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.setBackground(new Color(255, 255, 255));
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 							
@@ -105,7 +111,7 @@ public class Tela_Cadastrar extends JFrame {
 				
 				jogador.setTelefone(telefone);
 				jogador.setIdade(idade);
-				if(jogador.getSenha().equals(jogador.getConfirma())){
+				if(jogador.getSenha().equals(jogador.getConfirma()) && jogador.Existente().equals("ERRO")){
 						jogador.Cadastrar(true);
 						JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
 						Tela_Login tela = new Tela_Login();
@@ -159,6 +165,7 @@ public class Tela_Cadastrar extends JFrame {
 		contentPane.add(lblLogo);
 		
 		btnSair = new JButton("Voltar");
+		btnSair.setBackground(new Color(255, 255, 255));
 		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Tela_Login l = new Tela_Login();
@@ -173,6 +180,12 @@ public class Tela_Cadastrar extends JFrame {
 		lblLoginExistente = new JLabel();
 		lblLoginExistente.setBounds(837, 205, 144, 14);
 		contentPane.add(lblLoginExistente);
+		
+		lblFundo = new JLabel("Fundo");
+		lblFundo.setVerticalAlignment(SwingConstants.TOP);
+		lblFundo.setIcon(new ImageIcon("C:\\Users\\ricar\\Desktop\\ProjetoII_r-d\\Projeto_Integrador\\img\\Fundo.png"));
+		lblFundo.setBounds(0, -11, 2534, 768);
+		contentPane.add(lblFundo);
 		
 		txtLogin.addFocusListener(new FocusAdapter() {
             public void focusLost(FocusEvent evt) {

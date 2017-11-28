@@ -172,16 +172,16 @@ public class Jogador {
 	public String Cadastrar(boolean acrescentar) {
 		String ret = null;
 
-//		if (acrescentar) {
-//			List<Jogador> listaObjectJog = this.Ler();
-//			this.setId(listaObjectJog.size());
-//
-//		}
+		if (acrescentar) {
+			List<Jogador> listaObjectJog = this.Ler();
+			this.setId(listaObjectJog.size());
+
+		}
 		
 		try {
 			
 			String linha = this.id + ";" + this.nome + ";" + this.login + ";" + this.senha + ";" + this.telefone + ";"
-					+ this.idade + ";" + this.nivel + ";" + this.pontos + ";" + this.horcrux;
+					+ this.idade + ";" + this.getNivel() + ";" + this.pontos + ";" + this.getHorcrux();
 
 			Arquivo arq = new Arquivo();
 			arq.setNome("Jogador.txt");

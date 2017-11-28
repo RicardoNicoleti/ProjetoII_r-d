@@ -59,7 +59,7 @@ public class Ranking implements Comparator<Jogador> {
 	@Override
 	public int compare(Jogador um, Jogador dois) {
 
-		return dois.getPontos() - um.getPontos();
+		return dois.getNivel() - um.getNivel();
 
 	}
 

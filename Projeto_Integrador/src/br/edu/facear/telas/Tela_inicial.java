@@ -12,24 +12,31 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import br.edu.facear.classes.Jogador;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class Tela_inicial extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel painel;
-	private JLabel lblBemVindo, lblLogo;
+	private JLabel lblBemVindo;
 	private JButton btnJogar, btnRanking, btnCadastrarPergunta, btnAvaliarPergunta;
+	private JLabel lblFundo;
+	private JLabel label;
+	private JLabel label_1;
 
 	public void Run() {
 		this.setSize(1144, 762);
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 		this.setExtendedState(MAXIMIZED_BOTH);
-
+		this.setResizable(false);
 
 	}
 
 	public Tela_inicial() {
+		setTitle("Tela inicial");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1218, 640);
 		painel = new JPanel();
@@ -40,16 +47,14 @@ public class Tela_inicial extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		painel.add(panel, BorderLayout.CENTER);
-		lblBemVindo = new JLabel("Bem vindo " + Jogador.getInstance().getLogin());
-		lblBemVindo.setBounds(646, 135, 183, 14);
+		lblBemVindo = new JLabel("Bem vindo " + Jogador.getInstance().getLogin().toUpperCase());
+		lblBemVindo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBemVindo.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblBemVindo.setBounds(590, 133, 217, 34);
 		panel.add(lblBemVindo);
 
-		lblLogo = new JLabel("Quiz by R&D");
-		lblLogo.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblLogo.setBounds(626, 69, 117, 55);
-		panel.add(lblLogo);
-
 		btnJogar = new JButton("Jogar");
+		btnJogar.setBackground(new Color(255, 255, 255));
 		btnJogar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Tela_Jogo jogo = new Tela_Jogo();
@@ -63,6 +68,7 @@ public class Tela_inicial extends JFrame {
 		btnJogar.setFont(new Font("Arial", Font.PLAIN, 16));
 
 		btnRanking = new JButton("Ranking");
+		btnRanking.setBackground(new Color(255, 255, 255));
 		btnRanking.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Tela_Ranking r = new Tela_Ranking();
@@ -75,6 +81,7 @@ public class Tela_inicial extends JFrame {
 		btnRanking.setFont(new Font("Arial", Font.PLAIN, 16));
 
 		btnCadastrarPergunta = new JButton("Cadastrar perguntas");
+		btnCadastrarPergunta.setBackground(new Color(255, 255, 255));
 		btnCadastrarPergunta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Tela_Cadastrar_Pergunta c = new Tela_Cadastrar_Pergunta();
@@ -87,6 +94,7 @@ public class Tela_inicial extends JFrame {
 		btnCadastrarPergunta.setFont(new Font("Arial", Font.PLAIN, 16));
 
 		btnAvaliarPergunta = new JButton("Avaliar Perguntas");
+		btnAvaliarPergunta.setBackground(new Color(255, 255, 255));
 		btnAvaliarPergunta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -101,6 +109,7 @@ public class Tela_inicial extends JFrame {
 		btnAvaliarPergunta.setFont(new Font("Arial", Font.PLAIN, 16));
 
 		JButton btnSair = new JButton("Sair");
+		btnSair.setBackground(new Color(255, 255, 255));
 		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Tela_Login l = new Tela_Login();
@@ -111,6 +120,20 @@ public class Tela_inicial extends JFrame {
 		btnSair.setFont(new Font("Arial", Font.PLAIN, 16));
 		btnSair.setBounds(590, 467, 200, 46);
 		panel.add(btnSair);
+		
+		label = new JLabel("by R&D");
+		label.setBounds(711, 93, 46, 14);
+		panel.add(label);
+		
+		label_1 = new JLabel("Quiz");
+		label_1.setFont(new Font("Arial", Font.PLAIN, 40));
+		label_1.setBounds(632, 48, 80, 61);
+		panel.add(label_1);
+		
+		lblFundo = new JLabel("Fundo");
+		lblFundo.setIcon(new ImageIcon("C:\\Users\\ricar\\Desktop\\ProjetoII_r-d\\Projeto_Integrador\\img\\Fundo.png"));
+		lblFundo.setBounds(0, 0, 2362, 768);
+		panel.add(lblFundo);
 
 	}
 }

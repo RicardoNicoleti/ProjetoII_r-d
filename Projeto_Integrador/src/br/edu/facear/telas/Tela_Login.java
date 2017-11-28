@@ -14,6 +14,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import br.edu.facear.classes.Jogador;
+import javax.swing.ImageIcon;
+import java.awt.Color;
 
 public class Tela_Login extends JFrame {
 
@@ -28,6 +30,7 @@ public class Tela_Login extends JFrame {
 		this.setSize(437, 302);
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
+		this.setResizable(false);
 	}
 	
 	public Tela_Login() {
@@ -39,33 +42,29 @@ public class Tela_Login extends JFrame {
 		setContentPane(painel);
 		painel.setLayout(null);
 		
-		JLabel lblQuizByRd = new JLabel("Quiz by R&D");
-		lblQuizByRd.setBounds(159, 11, 156, 32);
-		painel.add(lblQuizByRd);
-		lblQuizByRd.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		
 		JLabel lblLogin = new JLabel("Login");
-		lblLogin.setBounds(108, 84, 35, 17);
+		lblLogin.setBounds(87, 84, 35, 17);
 		painel.add(lblLogin);
-		lblLogin.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblLogin.setFont(new Font("Arial", Font.PLAIN, 15));
 		
 		txtLogin = new JTextField();
-		txtLogin.setBounds(159, 83, 176, 20);
+		txtLogin.setBounds(138, 83, 176, 20);
 		painel.add(txtLogin);
 		txtLogin.setColumns(20);
 		
 		JLabel lblSenha = new JLabel("Senha");
-		lblSenha.setBounds(108, 112, 41, 17);
+		lblSenha.setBounds(83, 112, 52, 17);
 		painel.add(lblSenha);
-		lblSenha.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblSenha.setFont(new Font("Arial", Font.PLAIN, 15));
 		
 		txtSenha = new JPasswordField();
-		txtSenha.setBounds(159, 111, 176, 20);
+		txtSenha.setBounds(138, 111, 176, 20);
 		painel.add(txtSenha);
 		txtSenha.setColumns(20);
 		
 		JButton btnSair = new JButton("Sair");
-		btnSair.setBounds(254, 141, 81, 25);
+		btnSair.setBackground(new Color(255, 255, 255));
+		btnSair.setBounds(233, 141, 81, 25);
 		painel.add(btnSair);
 		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -75,7 +74,8 @@ public class Tela_Login extends JFrame {
 		btnSair.setFont(new Font("Arial", Font.PLAIN, 14));
 		
 		JButton btnEntrar = new JButton("Entrar");
-		btnEntrar.setBounds(159, 141, 85, 25);
+		btnEntrar.setBackground(new Color(255, 255, 255));
+		btnEntrar.setBounds(138, 141, 85, 25);
 		painel.add(btnEntrar);
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -96,7 +96,8 @@ public class Tela_Login extends JFrame {
 		btnEntrar.setFont(new Font("Arial", Font.PLAIN, 14));
 		
 		JButton btnCadastrar = new JButton("Cadastre - se aqui");
-		btnCadastrar.setBounds(225, 190, 166, 25);
+		btnCadastrar.setBackground(new Color(255, 255, 255));
+		btnCadastrar.setBounds(209, 190, 166, 25);
 		painel.add(btnCadastrar);
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -108,10 +109,24 @@ public class Tela_Login extends JFrame {
 		btnCadastrar.setFont(new Font("Arial", Font.PLAIN, 14));
 		
 		JLabel lblCadastrar = new JLabel("Não é cadastrado");
-		lblCadastrar.setBounds(103, 194, 112, 17);
+		lblCadastrar.setBounds(87, 194, 112, 17);
 		painel.add(lblCadastrar);
 		lblCadastrar.setFont(new Font("Arial", Font.PLAIN, 14));
 	
 		getRootPane().setDefaultButton(btnEntrar);
+		
+		JLabel label = new JLabel("by R&D");
+		label.setBounds(240, 56, 46, 14);
+		painel.add(label);
+		
+		JLabel label_1 = new JLabel("Quiz");
+		label_1.setFont(new Font("Arial", Font.PLAIN, 40));
+		label_1.setBounds(161, 11, 80, 61);
+		painel.add(label_1);
+		
+		JLabel lblFundo = new JLabel("fundo");
+		lblFundo.setIcon(new ImageIcon("C:\\Users\\ricar\\Desktop\\ProjetoII_r-d\\Projeto_Integrador\\img\\Fundo2.png"));
+		lblFundo.setBounds(0, -25, 532, 330);
+		painel.add(lblFundo);
 	}
 }

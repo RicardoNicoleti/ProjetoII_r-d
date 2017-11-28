@@ -16,6 +16,7 @@ public class Pergunta {
 	private String alternativas3;
 	private String autor;
 	private Categoria categoria;
+	private Jogador jogador;
 
 	public Pergunta() {
 
@@ -91,9 +92,18 @@ public class Pergunta {
 		return categoria;
 	}
 
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
+	public void setCategoria(Categoria vector) {
+		this.categoria = vector;
 	}
+
+	public Jogador getJogador() {
+		return jogador;
+	}
+
+	public void setJogador(Jogador jogador) {
+		this.jogador = jogador;
+	}
+
 
 	public void AvaliarPerguntas() {
 
@@ -150,15 +160,24 @@ public class Pergunta {
 			Categoria categoria = new Categoria();
 			categoria.setId(idCat);	
 			
-			pergunta.setCategoria(categoria);
+			pergunta.setCategoria(categoria.Ler(idCat));
 			
 			pergunta.setPergunta(vetdados[2]);
 			pergunta.setCorreta(vetdados[3]); // Nome
 			pergunta.setAlternativas1(vetdados[4]);
 			pergunta.setAlternativas2(vetdados[5]);
-			pergunta.setAlternativas3(vetdados[6]);
-			pergunta.setAutor(vetdados[7]);
-
+			pergunta.setAlternativas3(vetdados[6]);	
+			int idJogador = Integer.parseInt(vetdados[7]);
+			Jogador jogador = new Jogador();			
+			jogador.setId(idJogador);
+			pergunta.setJogador(jogador.Ler(idJogador));
+			
+//			pergunta.setAutor(vetdados[7]);
+			
+			int avaliacao = Integer.parseInt(vetdados[8]);
+			pergunta.setAvaliacao(avaliacao);
+			
+			
 			// -> adicionar na lista de retorno
 			listaRetorno.add(pergunta);
 
@@ -178,7 +197,7 @@ public class Pergunta {
 
 		try {
 			String linha = this.id + ";" + this.categoria.getId() + ";" + this.pergunta + ";" + this.correta + ";"
-					+ this.alternativas1 + ";" + this.alternativas2 + ";" + this.alternativas3 + ";" + this.autor;
+					+ this.alternativas1 + ";" + this.alternativas2 + ";" + this.alternativas3 + ";" + this.getJogador().getId() + ";" + this.getAvaliacao();
 			Arquivo arq = new Arquivo();
 			arq.setNome("Pergunta.txt");
 			
@@ -192,6 +211,42 @@ public class Pergunta {
 
 		return ret;
 
+	}
+	
+	
+	public void AvaliarPergunta(boolean avaliar) {
+		if (avaliar) {
+			List<Pergunta> lista3 = new Pergunta().Ler();
+			for (int i = 0; i < lista3.size(); i++) {
+				if (lista3.get(i).getId() == this.getId()) {
+					lista3.get(i).setAvaliacao(lista3.get(i).getAvaliacao() + 1);
+
+				}
+				new Pergunta().Salvar(lista3);
+			}
+			
+		} else {
+			List<Pergunta> lista3 = new Pergunta().Ler();
+			for (int i = 0; i < lista3.size(); i++) {
+				if (lista3.get(i).getId() == this.getId()) {
+					lista3.get(i).setAvaliacao(lista3.get(i).getAvaliacao() - 1);
+
+				}
+				new Pergunta().Salvar(lista3);
+			}
+		}
+
+	}
+
+	public void Salvar(List<Pergunta> lista) {
+		int cont = 0;
+		for (Pergunta pergunta : lista) {
+			if (cont == 0)
+				pergunta.Cadastrar(false);
+			else
+				pergunta.Cadastrar(true);
+			cont++;
+		}
 	}
 
 }

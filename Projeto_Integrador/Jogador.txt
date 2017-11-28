@@ -1,3 +1,9 @@
-0;admin;admin;admin;99999;12;0;0;300
-1;ricardo;ricardo;ricardo;9999;23;0;0;300
-2;douglas;douglas;douglas;999999;19;0;0;300
+0;admin;admin;admin;99999;12;30;3;14
+1;ricardo;ricardo;ricardo;9999;23;11;4;3
+2;douglas;douglas;douglas;999999;0;0;4;3
+3;jose;jose;1234;9999999;34;7;3;4
+4;joao;joao;1234;9999999;23;10;4;9
+5;maria;maria;1234;99999;56;0;10;8
+6;pedro;pedro;1234;99999;23;9;4;12
+7;mario;mario;12345;99999999;23;0;0;0
+8;ricardo;ricardo1;12345;99999999;27;5;7;0

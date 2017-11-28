@@ -15,9 +15,26 @@ public class Jogo {
 	private boolean finalizado;
 	private boolean salvarJogo;
 	private boolean jogoAnterior;
+	private int PontoJogador1, PontoJogador2;
 
 	public Jogo() {
 
+	}
+
+	public int getPontoJogador1() {
+		return PontoJogador1;
+	}
+
+	public void setPontoJogador1(int pontoJogador1) {
+		PontoJogador1 = pontoJogador1;
+	}
+
+	public int getPontoJogador2() {
+		return PontoJogador2;
+	}
+
+	public void setPontoJogador2(int pontoJogador2) {
+		PontoJogador2 = pontoJogador2;
 	}
 
 	public boolean isJogoAnterior() {
@@ -101,12 +118,6 @@ public class Jogo {
 		this.pergunta = pergunta;
 	}
 
-	public void Jogar() {
-
-
-
-	}
-
 	public void SalvarJogo() {
 		int cont = 0;
 		Jogo jogo = new Jogo();
@@ -142,7 +153,7 @@ public class Jogo {
 			}
 
 		}
-		
+
 		rodada.setIdRodada(cont);
 		rodada.setJogo(this);
 		rodada.setPergunta(this.getPergunta());
@@ -158,6 +169,8 @@ public class Jogo {
 		for (Jogo jogo2 : lista) {
 			if (jogo2.getId() == this.getId()) {
 				this.setId(this.getId());
+				this.setPontoJogador1(jogo2.getPontoJogador1());
+				this.setPontoJogador2(jogo2.getPontoJogador2());
 				for (Rodada rodada : jogo2.getRodada()) {
 					if (!rodada.isPerguntaRes()
 							&& rodada.getJogo().getJogador1().getId() == Jogador.getInstance().getId()) {
@@ -166,6 +179,7 @@ public class Jogo {
 						this.setJogadorVez(jogador.Ler(rodada.getJogo().getJogadorVez().getId()));
 						this.setJogador1(jogador.Ler(jogo2.getJogador1().getId()));
 						this.setJogador2(jogador.Ler(jogo2.getJogador2().getId()));
+
 					}
 				}
 				this.setSalvarJogo(true);
@@ -176,8 +190,17 @@ public class Jogo {
 	public void EscolherPergunta() {
 		Pergunta pergunta = new Pergunta();
 		List<Pergunta> object1 = pergunta.Ler();
-		int ID = new Random().nextInt(object1.size());
-		this.setPergunta(pergunta.buscarPerguntas(ID));
+		int ID = new Random().nextInt(6)+1;
+		List<Integer> lista1 = new ArrayList<Integer>();
+		for (Pergunta pergunta2 : object1) {
+			if(pergunta2.getCategoria().getId() == ID && pergunta2.getAvaliacao() >= 5){
+				lista1.add(pergunta2.getId());
+			}
+		}
+		int sorteado = lista1.get(new Random().nextInt(lista1.size()));
+		
+		this.setPergunta(pergunta.buscarPerguntas(sorteado));
+		
 		List<Jogo> object2 = this.Ler();
 		for (Jogo jogo : object2) {
 			for (Rodada rodada : jogo.getRodada()) {
@@ -190,26 +213,26 @@ public class Jogo {
 		}
 	}
 
-	public void PerguntaFeitas() {
-		List<Rodada> lista3 = new Rodada().Ler();
-		for (int i = 0; i < lista3.size(); i++) {
-			if (lista3.get(i).getJogo().getJogador1().getId() == Jogador.getInstance().getId()
-					&& lista3.get(i).getJogo().getId() == this.getId()) {
-				lista3.get(i).setPerguntaRes(true);
+	public void PerguntasFeitas() {
+		List<Rodada> lista = new Rodada().Ler();
+		for (int i = 0; i < lista.size(); i++) {
+			if (lista.get(i).getJogo().getJogador1().getId() == Jogador.getInstance().getId()
+					&& lista.get(i).getJogo().getId() == this.getId()) {
+				lista.get(i).setPerguntaRes(true);
 			}
 		}
-		new Rodada().Salvar(lista3);
+		new Rodada().Salvar(lista);
 	}
 
 	public void FinalizarJogo() {
-		List<Jogo> lista3 = new Jogo().Ler();
-		for (int i = 0; i < lista3.size(); i++) {
-			if (lista3.get(i).getId() == this.getId()
-					&& lista3.get(i).getJogador1().getId() == Jogador.getInstance().getId()) {
-				lista3.get(i).setFinalizado(true);
+		List<Jogo> lista = new Jogo().Ler();
+		for (int i = 0; i < lista.size(); i++) {
+			if (lista.get(i).getId() == this.getId()
+					&& lista.get(i).getJogador1().getId() == Jogador.getInstance().getId()) {
+				lista.get(i).setFinalizado(true);
 			}
 		}
-		new Jogo().SalvarTudo(lista3);
+		new Jogo().SalvarTudo(lista);
 	}
 
 	public void EscolherAdversario() {
@@ -221,6 +244,66 @@ public class Jogo {
 		if (getJogador1().getId() == getJogador2().getId()) {
 			EscolherAdversario();
 		}
+	}
+
+	public void PedirAjuda() {
+		if (this.getJogadorVez().getId() == this.getJogadorVez().getId()) {
+			List<Jogador> lista = new Jogador().Ler();
+			for (int i = 0; i < lista.size(); i++) {
+				if (lista.get(i).getId() == this.getJogadorVez().getId() && lista.get(i).getHorcrux() > 0) {
+					lista.get(i).setHorcrux(lista.get(i).getHorcrux() - 1);
+					this.jogadorVez.setHorcrux(lista.get(i).getHorcrux());
+				}
+			}
+			new Jogador().Salvar(lista);
+
+		}
+	}
+
+	public void AtualizarPontos() {
+
+		if (this.getJogadorVez().getId() == this.getJogadorVez().getId()) {
+			List<Jogador> lista = new Jogador().Ler();
+			for (int i = 0; i < lista.size(); i++) {
+				if (lista.get(i).getId() == this.getJogadorVez().getId()) {
+					if (lista.get(i).getPontos() == 9) {
+						int diferenca = lista.get(i).getPontos() - 8;
+						lista.get(i).setHorcrux(lista.get(i).getHorcrux() + 1);
+						lista.get(i).setPontos(diferenca);
+						this.jogadorVez.setPontos(diferenca);
+						this.jogadorVez.setHorcrux(lista.get(i).getHorcrux());
+					} else if (lista.get(i).getPontos() == 10) {
+						lista.get(i).setHorcrux(lista.get(i).getHorcrux() + 1);
+						lista.get(i).setPontos(0);
+						this.jogadorVez.setPontos(lista.get(i).getPontos());
+						this.jogadorVez.setHorcrux(lista.get(i).getHorcrux());
+					} else {
+						lista.get(i).setPontos(lista.get(i).getPontos() + 3);
+						this.jogadorVez.setPontos(lista.get(i).getPontos());
+						this.jogadorVez.setHorcrux(lista.get(i).getHorcrux());
+					}
+					if (lista.get(i).getHorcrux() % 10 == 0) {
+						lista.get(i).setNivel(lista.get(i).getNivel() + 1);
+					}
+				}
+			}
+			new Jogador().Salvar(lista);
+		}
+		
+		List<Jogo> lista1 = Ler();
+		for (int i = 0; i < lista1.size(); i++) {
+			if (lista1.get(i).getId() == this.getId()) {
+				if (this.getJogadorVez().getId() == Jogador.getInstance().getId()) {
+					lista1.get(i).setPontoJogador1(lista1.get(i).getPontoJogador1() +1);
+					lista1.get(i).setPontoJogador2(lista1.get(i).getPontoJogador2());
+				} else {
+					lista1.get(i).setPontoJogador2(lista1.get(i).getPontoJogador2() +1);
+					lista1.get(i).setPontoJogador1(lista1.get(i).getPontoJogador1());
+				}
+			}
+		}
+		new Jogo().SalvarTudo(lista1);
+		
 	}
 
 	public List<Jogo> Ler() {
@@ -258,8 +341,14 @@ public class Jogo {
 			Jogador jogador2 = new Jogador();
 			jogador2.setId(idJogador2);
 			jogo.setJogador2(jogador2);
-
-			boolean finalizado = Boolean.parseBoolean(vetdados[3]);
+			
+			int ponto1 = Integer.parseInt(vetdados[3]);
+			jogo.setPontoJogador1(ponto1);
+			
+			int ponto2 = Integer.parseInt(vetdados[4]);
+			jogo.setPontoJogador2(ponto2);
+			
+			boolean finalizado = Boolean.parseBoolean(vetdados[5]);
 			jogo.setFinalizado(finalizado);
 
 			// -> adicionar na lista de retorno
@@ -276,7 +365,7 @@ public class Jogo {
 		try {
 
 			String linha = this.getId() + ";" + this.getJogador1().getId() + ";" + this.getJogador2().getId() + ";"
-					+ this.finalizado;
+					+ this.PontoJogador1 + ";" + this.PontoJogador2 + ";" + this.finalizado;
 
 			Arquivo arq = new Arquivo();
 			arq.setNome("Jogo.txt");
@@ -289,7 +378,7 @@ public class Jogo {
 			ret = "ERRO";
 
 		}
-		
+
 		return ret;
 	}
 

@@ -19,6 +19,10 @@ import javax.swing.table.DefaultTableModel;
 
 import br.edu.facear.classes.Jogador;
 import br.edu.facear.classes.Ranking;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 
 public class Tela_Ranking extends JFrame {
 
@@ -34,6 +38,7 @@ public class Tela_Ranking extends JFrame {
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 		this.setExtendedState(MAXIMIZED_BOTH);
+		this.setResizable(false);
 		
 	}
 	
@@ -49,9 +54,10 @@ public class Tela_Ranking extends JFrame {
 				List<Jogador> lista =  ranking.GerenciarRanking();
 				Collections.sort(lista, new Ranking());
 				for (int i = 0; i < lista.size(); i++) {
-					Object[] linha = new Object[2];
-					linha[0] = lista.get(i).getNome();
-					linha[1] = lista.get(i).getPontos();
+					Object[] linha = new Object[3];
+					linha[0] = i+1 + "°";
+					linha[1] = lista.get(i).getNome();
+					linha[2] = lista.get(i).getNivel();
 					modelo.addRow(linha);
 					
 			}
@@ -64,55 +70,34 @@ public class Tela_Ranking extends JFrame {
 	}
 	
 	public Tela_Ranking() {
+		setTitle("Ranking");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1083, 684);
+		setBounds(100, 100, 1083, 623);
 		contentPane = new JPanel();
 		contentPane.setBorder(new CompoundBorder());
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblMelhoresDaSemana = new JLabel("Melhores da semana");
-		lblMelhoresDaSemana.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblMelhoresDaSemana.setBounds(432, 127, 174, 14);
-		contentPane.add(lblMelhoresDaSemana);
-		
-		JLabel lblRanking = new JLabel("RANKING");
-		lblRanking.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblRanking.setBounds(680, 62, 127, 14);
-		contentPane.add(lblRanking);
-		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(432, 186, 274, 320);
+		scrollPane.setViewportBorder(null);
+		scrollPane.setBounds(417, 186, 629, 320);
 		contentPane.add(scrollPane);
 		
 		tblSemana = new JTable();
 		scrollPane.setViewportView(tblSemana);
 		tblSemana.setBorder(new LineBorder(new Color(0, 0, 0)));
-		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[]{"Nome","Pontos"});
+		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[]{"Posição", "Nome","Nivel"});
 		scrollPane.setViewportView(tblSemana);
 		tblSemana.setModel(modelo);
 		tblSemana.setEnabled(false);
-		tblSemana.getColumnModel().getColumn(0).setPreferredWidth(120);
-		tblSemana.getColumnModel().getColumn(1).setPreferredWidth(120);
+		tblSemana.getColumnModel().getColumn(0).setPreferredWidth(5);
+		tblSemana.getColumnModel().getColumn(1).setPreferredWidth(100);
+		tblSemana.getColumnModel().getColumn(2).setPreferredWidth(120);
 		
 		preencherTabela();
-				
-		JLabel lblSuaPosio = new JLabel("Sua posi\u00E7\u00E3o \u00E9:");
-		lblSuaPosio.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblSuaPosio.setBounds(432, 152, 174, 23);
-		contentPane.add(lblSuaPosio);
-		
-		JLabel lblMelhoresDoMs = new JLabel("Melhores do m\u00EAs");
-		lblMelhoresDoMs.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblMelhoresDoMs.setBounds(783, 127, 174, 14);
-		contentPane.add(lblMelhoresDoMs);
-		
-		JLabel label = new JLabel("Sua posi\u00E7\u00E3o \u00E9:");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		label.setBounds(783, 152, 174, 23);
-		contentPane.add(label);
 		
 		JButton btnSair = new JButton("Voltar");
+		btnSair.setBackground(new Color(255, 255, 255));
 		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Tela_inicial t = new Tela_inicial();
@@ -121,14 +106,31 @@ public class Tela_Ranking extends JFrame {
 				
 			}
 		});
-		btnSair.setBounds(690, 555, 104, 31);
+		btnSair.setBounds(680, 530, 116, 43);
 		contentPane.add(btnSair);
-		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(783, 186, 274, 320);
-		contentPane.add(scrollPane_1);
 	
 		getRootPane().setDefaultButton(btnSair);
+		
+		JLabel label_1 = new JLabel("by R&D");
+		label_1.setBounds(759, 56, 46, 14);
+		contentPane.add(label_1);
+		
+		JLabel label_2 = new JLabel("Quiz");
+		label_2.setFont(new Font("Arial", Font.PLAIN, 40));
+		label_2.setBounds(680, 11, 80, 61);
+		contentPane.add(label_2);
+		
+		JLabel lblRanking = new JLabel("Ranking");
+		lblRanking.setFont(new Font("Showcard Gothic", Font.PLAIN, 30));
+		lblRanking.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRanking.setBounds(525, 110, 414, 51);
+		contentPane.add(lblRanking);
+		
+		JLabel lblFundo = new JLabel("Logo");
+		lblFundo.setVerticalAlignment(SwingConstants.TOP);
+		lblFundo.setIcon(new ImageIcon("C:\\Users\\ricar\\Desktop\\ProjetoII_r-d\\Projeto_Integrador\\img\\Fundo.png"));
+		lblFundo.setBounds(0, 0, 2566, 869);
+		contentPane.add(lblFundo);
 		
 	
 					

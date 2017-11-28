@@ -80,6 +80,18 @@ public class Categoria {
 		return vetorRetorno;
 	}
 	
+	public Categoria Ler(int ID) {
+		Categoria categoriaRetorno = null;
+		Categoria cat = new Categoria();
+		List<Categoria> listaObjectCa = cat.Ler();
+		for (Categoria categoria : listaObjectCa) {
+			if (categoria.getId() == ID)
+				categoriaRetorno = categoria;
+		}
+		return categoriaRetorno;
+	}
+	
+	
 	
 	@Override
 	public String toString() {
