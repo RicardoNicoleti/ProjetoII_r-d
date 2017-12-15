@@ -7,22 +7,20 @@ import java.awt.event.ActionListener;
 import java.util.Collections;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import br.edu.facear.classes.Jogador;
 import br.edu.facear.classes.Ranking;
-import javax.swing.ImageIcon;
-import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.MatteBorder;
 
 public class Tela_Ranking extends JFrame {
 
@@ -72,7 +70,7 @@ public class Tela_Ranking extends JFrame {
 	public Tela_Ranking() {
 		setTitle("Ranking");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1083, 623);
+		setBounds(100, 100, 1191, 654);
 		contentPane = new JPanel();
 		contentPane.setBorder(new CompoundBorder());
 		setContentPane(contentPane);
@@ -80,24 +78,32 @@ public class Tela_Ranking extends JFrame {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setViewportBorder(null);
-		scrollPane.setBounds(417, 186, 629, 320);
+		scrollPane.setBounds(249, 284, 885, 252);
 		contentPane.add(scrollPane);
 		
 		tblSemana = new JTable();
+		tblSemana.setForeground(Color.BLACK);
+		tblSemana.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 20));
+		tblSemana.setShowVerticalLines(false);
+		tblSemana.setBackground(new Color(147, 112, 219));
 		scrollPane.setViewportView(tblSemana);
-		tblSemana.setBorder(new LineBorder(new Color(0, 0, 0)));
-		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[]{"Posição", "Nome","Nivel"});
+		tblSemana.setBorder(new LineBorder(new Color(147, 112, 219)));
+		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[]{"POSIÇÃO", "LOGIN","NIVEL"});
 		scrollPane.setViewportView(tblSemana);
 		tblSemana.setModel(modelo);
 		tblSemana.setEnabled(false);
+		tblSemana.setRowHeight(20); 
 		tblSemana.getColumnModel().getColumn(0).setPreferredWidth(5);
 		tblSemana.getColumnModel().getColumn(1).setPreferredWidth(100);
 		tblSemana.getColumnModel().getColumn(2).setPreferredWidth(120);
-		
+
 		preencherTabela();
 		
-		JButton btnSair = new JButton("Voltar");
-		btnSair.setBackground(new Color(255, 255, 255));
+		JButton btnSair = new JButton("Sair");
+		btnSair.setIcon(new ImageIcon("C:\\Users\\ricar\\Desktop\\ProjetoII_r-d\\Projeto_Integrador\\img\\Sair.png"));
+		btnSair.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 20));
+		btnSair.setForeground(Color.WHITE);
+		btnSair.setBackground(new Color(75, 0, 130));
 		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Tela_inicial t = new Tela_inicial();
@@ -106,33 +112,31 @@ public class Tela_Ranking extends JFrame {
 				
 			}
 		});
-		btnSair.setBounds(680, 530, 116, 43);
+		
+		JLabel lblTrofeu = new JLabel("");
+		lblTrofeu.setIcon(new ImageIcon("C:\\Users\\ricar\\Desktop\\ProjetoII_r-d\\Projeto_Integrador\\img\\trofeu.png"));
+		lblTrofeu.setBounds(513, 124, 300, 150);
+		contentPane.add(lblTrofeu);
+		btnSair.setBounds(586, 547, 155, 57);
 		contentPane.add(btnSair);
 	
 		getRootPane().setDefaultButton(btnSair);
 		
-		JLabel label_1 = new JLabel("by R&D");
-		label_1.setBounds(759, 56, 46, 14);
-		contentPane.add(label_1);
+		JLabel lblLogo = new JLabel("");
+		lblLogo.setIcon(new ImageIcon("C:\\Users\\ricar\\Desktop\\ProjetoII_r-d\\Projeto_Integrador\\img\\Logo.png"));
+		lblLogo.setForeground(Color.WHITE);
+		lblLogo.setFont(new Font("Script MT Bold", Font.PLAIN, 25));
+		lblLogo.setBackground(Color.WHITE);
+		lblLogo.setBounds(513, -36, 311, 200);
+		contentPane.add(lblLogo);
 		
-		JLabel label_2 = new JLabel("Quiz");
-		label_2.setFont(new Font("Arial", Font.PLAIN, 40));
-		label_2.setBounds(680, 11, 80, 61);
-		contentPane.add(label_2);
-		
-		JLabel lblRanking = new JLabel("Ranking");
-		lblRanking.setFont(new Font("Showcard Gothic", Font.PLAIN, 30));
-		lblRanking.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRanking.setBounds(525, 110, 414, 51);
-		contentPane.add(lblRanking);
-		
-		JLabel lblFundo = new JLabel("Logo");
+		JLabel lblFundo = new JLabel("");
 		lblFundo.setVerticalAlignment(SwingConstants.TOP);
-		lblFundo.setIcon(new ImageIcon("C:\\Users\\ricar\\Desktop\\ProjetoII_r-d\\Projeto_Integrador\\img\\Fundo.png"));
+		lblFundo.setIcon(new ImageIcon("C:\\Users\\ricar\\Desktop\\ProjetoII_r-d\\Projeto_Integrador\\img\\FundoPadrao.png"));
 		lblFundo.setBounds(0, 0, 2566, 869);
 		contentPane.add(lblFundo);
 		
-	
-					
+		scrollPane.getViewport().setBackground(new Color(147, 112, 219));
+		tblSemana.setBackground(new Color(147, 112, 219));				
 	}
 }

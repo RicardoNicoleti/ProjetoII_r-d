@@ -11,13 +11,13 @@ public class Jogador {
 	private int idade;
 	private String login;
 	private String senha;
-	private int telefone;
+	private String telefone;
 	private int pontos;
 	private int nivel;
 	private String confirma;
 	private int horcrux;
 	private static Jogador logado;
-	
+	private String imagem;
 	
 	public Jogador(){
 		
@@ -79,11 +79,11 @@ public class Jogador {
 		this.senha = senha;
 	}
 
-	public int getTelefone() {
+	public String getTelefone() {
 		return telefone;
 	}
 
-	public void setTelefone(int telefone) {
+	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 
@@ -117,6 +117,14 @@ public class Jogador {
 
 	public void setHorcrux(int horcrux) {
 		this.horcrux = horcrux;
+	}
+
+	public String getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
 	}
 
 	public String Logar() {
@@ -181,7 +189,7 @@ public class Jogador {
 		try {
 			
 			String linha = this.id + ";" + this.nome + ";" + this.login + ";" + this.senha + ";" + this.telefone + ";"
-					+ this.idade + ";" + this.getNivel() + ";" + this.pontos + ";" + this.getHorcrux();
+					+ this.idade + ";" + this.getNivel() + ";" + this.pontos + ";" + this.getHorcrux() + ";" + this.getImagem();
 
 			Arquivo arq = new Arquivo();
 			arq.setNome("Jogador.txt");
@@ -219,8 +227,7 @@ public class Jogador {
 			jogador.setNome(vetdados[1]); // Nome
 			jogador.setLogin(vetdados[2]);
 			jogador.setSenha(vetdados[3]);
-			int telefone = Integer.parseInt(vetdados[4]);
-			jogador.setTelefone(telefone);
+			jogador.setTelefone(vetdados[4]);
 			int idade = Integer.parseInt(vetdados[5]);
 			jogador.setIdade(idade);
 			int nivel = Integer.parseInt(vetdados[6]);
@@ -229,6 +236,8 @@ public class Jogador {
 			jogador.setPontos(pontos);
 			int horcrux = Integer.parseInt(vetdados[8]);
 			jogador.setHorcrux(horcrux);
+			jogador.setImagem(vetdados[9]);
+			
 			
 			// -> adicionar na lista de retorno
 			listaRetorno.add(jogador);
@@ -262,4 +271,13 @@ public class Jogador {
 		}		
 	}
 	
+	public void editarFoto(){
+		List<Jogador> lista = Ler();
+		for (int i = 0; i < lista.size(); i++) {
+			if (lista.get(i).getId() == Jogador.getInstance().getId()) {
+				lista.get(i).setImagem(getImagem());
+			}
+		}
+		this.Salvar(lista);
+	}
 }

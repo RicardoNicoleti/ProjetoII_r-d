@@ -2,23 +2,27 @@ package br.edu.facear.telas;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+import java.io.File;
+import java.text.ParseException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
 
 import br.edu.facear.classes.Jogador;
-import javax.swing.ImageIcon;
-import javax.swing.SwingConstants;
 
 public class Tela_Cadastrar extends JFrame {
 
@@ -28,14 +32,16 @@ public class Tela_Cadastrar extends JFrame {
 	private JTextField txtLogin;
 	private JPasswordField txtSenha;
 	private JPasswordField txtConfirmarSenha;
-	private JTextField txtTelefone;
+	private JFormattedTextField txtTelefone;
 	private JTextField txtIdade;
-	private JLabel label;
-	private JLabel lblLogo,lblLoginExistente;
+	private JLabel lblLoginExistente;
 	private JButton btnSair;
 	private Jogador jogador;
 	private JLabel lblFundo;
-
+	private JLabel label_2;
+	private JLabel lblImagem;
+	private JLabel lblSenhaIncorreta;
+	private String fileName;
 	
 	public void Run(){
 		this.setSize(1144, 762);
@@ -46,47 +52,55 @@ public class Tela_Cadastrar extends JFrame {
 	
 	}
 	
-	public Tela_Cadastrar() {
+	public Tela_Cadastrar() throws ParseException {
 		setTitle("Cadastrar Jogador");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1218, 640);
+		setBounds(100, 100, 1218, 704);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblNome = new JLabel("Nome");
-		lblNome.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblNome.setBounds(595, 143, 46, 14);
+		lblNome.setForeground(Color.BLACK);
+		lblNome.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 30));
+		lblNome.setBounds(455, 121, 63, 37);
 		contentPane.add(lblNome);
 		
 		JLabel lblLogin = new JLabel("Login");
-		lblLogin.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblLogin.setBounds(596, 183, 46, 21);
+		lblLogin.setForeground(Color.BLACK);
+		lblLogin.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 30));
+		lblLogin.setBounds(456, 190, 63, 37);
 		contentPane.add(lblLogin);
 		
 		JLabel lblSenha = new JLabel("Senha");
-		lblSenha.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblSenha.setBounds(596, 233, 46, 14);
+		lblSenha.setForeground(Color.BLACK);
+		lblSenha.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 30));
+		lblSenha.setBounds(455, 261, 68, 37);
 		contentPane.add(lblSenha);
 		
 		JLabel lblConfirmarSenha = new JLabel("Confirmar Senha");
-		lblConfirmarSenha.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblConfirmarSenha.setBounds(596, 277, 135, 14);
+		lblConfirmarSenha.setForeground(Color.BLACK);
+		lblConfirmarSenha.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 28));
+		lblConfirmarSenha.setBounds(455, 334, 185, 37);
 		contentPane.add(lblConfirmarSenha);
 		
 		JLabel lblTelefone = new JLabel("Telefone");
-		lblTelefone.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblTelefone.setBounds(595, 323, 89, 14);
+		lblTelefone.setForeground(Color.BLACK);
+		lblTelefone.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 30));
+		lblTelefone.setBounds(455, 403, 98, 37);
 		contentPane.add(lblTelefone);
 		
 		JLabel lblIdade = new JLabel("Idade");
-		lblIdade.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblIdade.setBounds(598, 364, 46, 14);
+		lblIdade.setForeground(Color.BLACK);
+		lblIdade.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 30));
+		lblIdade.setBounds(454, 477, 66, 37);
 		contentPane.add(lblIdade);
 		
-		JButton btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setBackground(new Color(255, 255, 255));
+		JButton btnCadastrar = new JButton(" Cadastrar");
+		btnCadastrar.setIcon(new ImageIcon("C:\\Users\\ricar\\Desktop\\ProjetoII_r-d\\Projeto_Integrador\\img\\plus.png"));
+		btnCadastrar.setForeground(Color.WHITE);
+		btnCadastrar.setBackground(new Color(75, 0, 130));
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 							
@@ -100,7 +114,7 @@ public class Tela_Cadastrar extends JFrame {
 				char[] charsConfirma = txtConfirmarSenha.getPassword();
 				String confirma = String.valueOf(charsConfirma);
 				
-				int telefone = Integer.parseInt(txtTelefone.getText());
+				String telefone = txtTelefone.getText();
 				int idade = Integer.parseInt(txtIdade.getText());
 				
 				jogador.setNome(nome);
@@ -111,61 +125,78 @@ public class Tela_Cadastrar extends JFrame {
 				
 				jogador.setTelefone(telefone);
 				jogador.setIdade(idade);
-				if(jogador.getSenha().equals(jogador.getConfirma()) && jogador.Existente().equals("ERRO")){
-						jogador.Cadastrar(true);
-						JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
-						Tela_Login tela = new Tela_Login();
-						tela.Run();
-						dispose();
+				
+				if(fileName == null){
+					fileName = "C:\\Users\\ricar\\Desktop\\ProjetoII_r-d\\Projeto_Integrador\\img\\UsuarioPadrao.png";
+					jogador.setImagem(fileName);
 				}else
-					JOptionPane.showMessageDialog(null, "Erro ao cadastrar");
+					jogador.setImagem(fileName);
+				
+				if(jogador.Existente().equals("ERRO"))
+					lblLoginExistente.setText("");
+				else
+					lblLoginExistente.setText(" * Login Existente");
+				if(jogador.getSenha().equals(jogador.getConfirma()))
+					lblSenhaIncorreta.setText("");
+				else
+					lblSenhaIncorreta.setText(" * As senhas não correspondem ");
+
+				
+				if(jogador.getSenha().equals(jogador.getConfirma()) && jogador.Existente().equals("ERRO")){
+					jogador.Cadastrar(true);
+					JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+					Tela_Login tela = new Tela_Login();
+					tela.Run();
+					dispose();
+				}
 			}
 		});
-		btnCadastrar.setFont(new Font("Arial", Font.PLAIN, 16));
-		btnCadastrar.setBounds(599, 419, 111, 34);
+		btnCadastrar.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 30));
+		btnCadastrar.setBounds(455, 562, 194, 58);
 		contentPane.add(btnCadastrar);
 		
 		txtNome = new JTextField();
-		txtNome.setBounds(594, 162, 234, 20);
+		txtNome.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtNome.setBounds(455, 159, 365, 27);
 		contentPane.add(txtNome);
 		txtNome.setColumns(10);
 		
 		txtLogin = new JTextField();
-		txtLogin.setBounds(596, 202, 231, 20);
+		txtLogin.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtLogin.setBounds(455, 230, 363, 27);
 		contentPane.add(txtLogin);
 		txtLogin.setColumns(10);
 		
 		txtSenha = new JPasswordField();
-		txtSenha.setBounds(596, 248, 230, 20);
+		txtSenha.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtSenha.setBounds(456, 303, 363, 27);
 		contentPane.add(txtSenha);
 		txtSenha.setColumns(10);
 		
 		txtConfirmarSenha = new JPasswordField();
-		txtConfirmarSenha.setBounds(597, 292, 231, 20);
+		txtConfirmarSenha.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtConfirmarSenha.setBounds(454, 374, 362, 27);
 		contentPane.add(txtConfirmarSenha);
 		txtConfirmarSenha.setColumns(10);
 		
-		txtTelefone = new JTextField();
-		txtTelefone.setBounds(596, 338, 133, 20);
+		MaskFormatter mascara = new MaskFormatter("(##) #####-####");
+		mascara.setPlaceholder("_");
+		txtTelefone = new JFormattedTextField(mascara);
+		txtTelefone.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtTelefone.setBounds(458, 443, 210, 27);
 		contentPane.add(txtTelefone);
 		txtTelefone.setColumns(10);
 		
 		txtIdade = new JTextField();
-		txtIdade.setBounds(598, 381, 46, 20);
+		txtIdade.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtIdade.setBounds(455, 516, 58, 27);
 		contentPane.add(txtIdade);
 		txtIdade.setColumns(10);
 		
-		label = new JLabel("");
-		label.setBounds(275, 69, 46, 14);
-		contentPane.add(label);
-		
-		lblLogo = new JLabel("Quiz by R&D");
-		lblLogo.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblLogo.setBounds(661, 28, 117, 55);
-		contentPane.add(lblLogo);
-		
-		btnSair = new JButton("Voltar");
-		btnSair.setBackground(new Color(255, 255, 255));
+		btnSair = new JButton("Sair");
+		btnSair.setForeground(Color.WHITE);
+		btnSair.setIcon(new ImageIcon("C:\\Users\\ricar\\Desktop\\ProjetoII_r-d\\Projeto_Integrador\\img\\Sair.png"));
+		btnSair.setBackground(new Color(75, 0, 130));
 		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Tela_Login l = new Tela_Login();
@@ -173,33 +204,70 @@ public class Tela_Cadastrar extends JFrame {
 				dispose();
 			}
 		});
-		btnSair.setFont(new Font("Arial", Font.PLAIN, 16));
-		btnSair.setBounds(714, 420, 114, 33);
+		btnSair.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 30));
+		btnSair.setBounds(659, 562, 194, 58);
 		contentPane.add(btnSair);
 		
 		lblLoginExistente = new JLabel();
-		lblLoginExistente.setBounds(837, 205, 144, 14);
+		lblLoginExistente.setForeground(Color.RED);
+		lblLoginExistente.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 15));
+		lblLoginExistente.setBounds(540, 195, 219, 30);
 		contentPane.add(lblLoginExistente);
+		
+		lblImagem = new JLabel("");
+		lblImagem.setIcon(new ImageIcon("C:\\Users\\ricar\\Desktop\\ProjetoII_r-d\\Projeto_Integrador\\img\\user-image-with-black-background.png"));
+		lblImagem.setBounds(876, 139, 128, 128);
+		contentPane.add(lblImagem);
+		
+		label_2 = new JLabel("");
+		label_2.setIcon(new ImageIcon("C:\\Users\\ricar\\Desktop\\ProjetoII_r-d\\Projeto_Integrador\\img\\Logo.png"));
+		label_2.setForeground(Color.WHITE);
+		label_2.setFont(new Font("Script MT Bold", Font.PLAIN, 25));
+		label_2.setBackground(Color.WHITE);
+		label_2.setBounds(568, -31, 311, 200);
+		contentPane.add(label_2);
+		
+		JButton btnSelecioneUmaImagem = new JButton("Adicionar Foto");
+		btnSelecioneUmaImagem.setBackground(Color.GREEN);
+		btnSelecioneUmaImagem.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 15));
+		btnSelecioneUmaImagem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser escolha = new JFileChooser();
+				escolha.showOpenDialog(null);
+				File f = escolha.getSelectedFile();
+				fileName = f.getAbsolutePath();
+				ImageIcon imageIcon = new ImageIcon(new ImageIcon(fileName).getImage().getScaledInstance(128, 128, Image.SCALE_DEFAULT));
+				lblImagem.setIcon(imageIcon);
+							
+			}
+		});
+		btnSelecioneUmaImagem.setBounds(856, 278, 178, 27);
+		contentPane.add(btnSelecioneUmaImagem);
+		
+		lblSenhaIncorreta = new JLabel("");
+		lblSenhaIncorreta.setForeground(Color.RED);
+		lblSenhaIncorreta.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 15));
+		lblSenhaIncorreta.setBounds(639, 341, 198, 30);
+		contentPane.add(lblSenhaIncorreta);
+		
+		JPanel panel = new JPanel();
+		panel.setForeground(new Color(147, 112, 219));
+		panel.setBackground(new Color(147, 112, 219));
+		panel.setBounds(391, 121, 709, 430);
+		contentPane.add(panel);
 		
 		lblFundo = new JLabel("Fundo");
 		lblFundo.setVerticalAlignment(SwingConstants.TOP);
-		lblFundo.setIcon(new ImageIcon("C:\\Users\\ricar\\Desktop\\ProjetoII_r-d\\Projeto_Integrador\\img\\Fundo.png"));
-		lblFundo.setBounds(0, -11, 2534, 768);
+		lblFundo.setIcon(new ImageIcon("C:\\Users\\ricar\\Desktop\\ProjetoII_r-d\\Projeto_Integrador\\img\\FundoPadrao.png"));
+		lblFundo.setBounds(-50, -7, 2534, 768);
 		contentPane.add(lblFundo);
 		
-		txtLogin.addFocusListener(new FocusAdapter() {
-            public void focusLost(FocusEvent evt) {
-            	String login = txtLogin.getText();
-            	jogador = new Jogador();
-            	jogador.setLogin(login);
-            	if(jogador.Existente().equals("OK")){
-            		lblLoginExistente.setText("Login existente");
-            		lblLoginExistente.setForeground(Color.RED);
-            	}else
-            		lblLoginExistente.setText("");
-                 
-            }
-        });
-		
+		JLabel lblLogo = new JLabel("");
+		lblLogo.setForeground(Color.WHITE);
+		lblLogo.setFont(new Font("Script MT Bold", Font.PLAIN, 25));
+		lblLogo.setBackground(Color.WHITE);
+		lblLogo.setBounds(547, -6, 311, 200);
+		contentPane.add(lblLogo);
+				
 	}
 }

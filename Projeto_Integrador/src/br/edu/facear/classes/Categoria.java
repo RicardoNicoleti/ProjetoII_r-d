@@ -40,13 +40,13 @@ public class Categoria {
 		
 		List<Categoria> listaRetorno = new ArrayList<Categoria>();
 		
-		
-		listaRetorno.add(new Categoria(1, "Ciências"));
-		listaRetorno.add(new Categoria(2, "Programação"));
-		listaRetorno.add(new Categoria(3, "História"));
-		listaRetorno.add(new Categoria(4, "Games"));
-		listaRetorno.add(new Categoria(5, "Geografia"));
-		listaRetorno.add(new Categoria(6, "Atualidades"));
+		listaRetorno.add(new Categoria(0, "Selecione uma categoria"));
+		listaRetorno.add(new Categoria(1, "Atualidades"));
+		listaRetorno.add(new Categoria(2, "Geografia"));
+		listaRetorno.add(new Categoria(3, "Games"));
+		listaRetorno.add(new Categoria(4, "História"));
+		listaRetorno.add(new Categoria(5, "Programação"));
+		listaRetorno.add(new Categoria(6, "Ciências"));
 		
 		return listaRetorno;
 	}

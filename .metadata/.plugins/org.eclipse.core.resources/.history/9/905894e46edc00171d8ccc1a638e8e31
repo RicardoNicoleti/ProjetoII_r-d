@@ -1,0 +1,145 @@
+package br.edu.facear.telas;
+
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import br.edu.facear.classes.Jogador;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import javax.swing.SwingConstants;
+import java.awt.SystemColor;
+
+public class Tela_inicial extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel painel;
+	private JLabel lblBemVindo;
+	private JButton btnJogar, btnRanking, btnCadastrarPergunta, btnAvaliarPergunta;
+	private JLabel lblFundo;
+	private JLabel label;
+	private JLabel label_1;
+
+	public void Run() {
+		this.setSize(1144, 762);
+		this.setVisible(true);
+		this.setLocationRelativeTo(null);
+		this.setExtendedState(MAXIMIZED_BOTH);
+		this.setResizable(false);
+
+	}
+
+	public Tela_inicial() {
+		setTitle("Tela inicial");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 1305, 640);
+		painel = new JPanel();
+		painel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(painel);
+		painel.setLayout(null);
+		painel.setBounds(5, 5, 1192, 591);
+		painel.setLayout(null);
+		lblBemVindo = new JLabel("Bem vindo " + Jogador.getInstance().getLogin().toUpperCase());
+		lblBemVindo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBemVindo.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 30));
+		lblBemVindo.setBounds(562, 216, 307, 34);
+		painel.add(lblBemVindo);
+
+		btnJogar = new JButton("JOGAR");
+		btnJogar.setBackground(new Color(0, 255, 0));
+		btnJogar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Tela_Jogo jogo = new Tela_Jogo();
+				jogo.Run();
+				dispose();
+
+			}
+		});
+		btnJogar.setBounds(503, 298, 457, 92);
+		painel.add(btnJogar);
+		btnJogar.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 30));
+
+		btnRanking = new JButton("");
+		btnRanking.setToolTipText("Ranking");
+		btnRanking.setHorizontalAlignment(SwingConstants.LEFT);
+		btnRanking.setIcon(new ImageIcon("C:\\Users\\ricar\\Downloads\\podium (1).png"));
+		btnRanking.setBackground(new Color(75, 0, 130));
+		btnRanking.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Tela_Ranking r = new Tela_Ranking();
+				r.Run();
+				dispose();
+			}
+		});
+		btnRanking.setBounds(503, 422, 97, 73);
+		painel.add(btnRanking);
+		btnRanking.setFont(new Font("Arial", Font.PLAIN, 16));
+
+		btnCadastrarPergunta = new JButton("Cadastrar perguntas");
+		btnCadastrarPergunta.setBackground(new Color(75, 0, 130));
+		btnCadastrarPergunta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Tela_Cadastrar_Pergunta c = new Tela_Cadastrar_Pergunta();
+				c.Run();
+				dispose();
+			}
+		});
+		btnCadastrarPergunta.setBounds(750, 422, 97, 73);
+		painel.add(btnCadastrarPergunta);
+		btnCadastrarPergunta.setFont(new Font("Arial", Font.PLAIN, 16));
+
+		btnAvaliarPergunta = new JButton("");
+		btnAvaliarPergunta.setToolTipText("Avaliar Pergunta");
+		btnAvaliarPergunta.setIcon(new ImageIcon("C:\\Users\\ricar\\Downloads\\thumbs-up.png"));
+		btnAvaliarPergunta.setBackground(new Color(75, 0, 130));
+		btnAvaliarPergunta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				Tela_Avaliar a = new Tela_Avaliar();
+				a.Run();
+				dispose();
+
+			}
+		});
+		btnAvaliarPergunta.setBounds(632, 422, 97, 73);
+		painel.add(btnAvaliarPergunta);
+		btnAvaliarPergunta.setFont(new Font("Arial", Font.PLAIN, 16));
+
+		JButton btnSair = new JButton("");
+		btnSair.setToolTipText("Sair");
+		btnSair.setIcon(new ImageIcon("C:\\Users\\ricar\\Downloads\\exit (1).png"));
+		btnSair.setBackground(new Color(75, 0, 130));
+		btnSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Tela_Login l = new Tela_Login();
+				l.Run();
+				dispose();
+			}
+		});
+		btnSair.setFont(new Font("Arial", Font.PLAIN, 16));
+		btnSair.setBounds(867, 422, 93, 73);
+		painel.add(btnSair);
+		
+		label = new JLabel("by R&D");
+		label.setBounds(742, 148, 46, 14);
+		painel.add(label);
+		
+		label_1 = new JLabel("Quiz");
+		label_1.setFont(new Font("Arial", Font.PLAIN, 40));
+		label_1.setBounds(663, 103, 80, 61);
+		painel.add(label_1);
+		
+		lblFundo = new JLabel("");
+		lblFundo.setIcon(new ImageIcon("C:\\Users\\ricar\\Desktop\\Fundo2.png"));
+		lblFundo.setBounds(0, 0, 2500, 768);
+		painel.add(lblFundo);
+
+	}
+}

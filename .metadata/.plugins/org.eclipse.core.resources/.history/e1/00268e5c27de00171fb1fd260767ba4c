@@ -1,0 +1,138 @@
+package br.edu.facear.telas;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Collections;
+import java.util.List;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
+
+import br.edu.facear.classes.Jogador;
+import br.edu.facear.classes.Ranking;
+
+public class Tela_Ranking extends JFrame {
+
+
+	private static final long serialVersionUID = 1L;
+	
+	private JPanel contentPane;
+	private JTable tblSemana;
+	private Ranking ranking;
+
+	public void Run() {
+		this.setSize(1144, 762);
+		this.setVisible(true);
+		this.setLocationRelativeTo(null);
+		this.setExtendedState(MAXIMIZED_BOTH);
+		this.setResizable(false);
+		
+	}
+	
+	public void preencherTabela() {
+		if (tblSemana != null) {
+			DefaultTableModel modelo = (DefaultTableModel) tblSemana.getModel();
+			if (modelo.getRowCount() > 0) {
+				modelo.setRowCount(0);
+			}
+	
+			try {
+				ranking = new Ranking();
+				List<Jogador> lista =  ranking.GerenciarRanking();
+				Collections.sort(lista, new Ranking());
+				for (int i = 0; i < lista.size(); i++) {
+					Object[] linha = new Object[3];
+					linha[0] = i+1 + "°";
+					linha[1] = lista.get(i).getNome();
+					linha[2] = lista.get(i).getNivel();
+					modelo.addRow(linha);
+					
+			}
+
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+
+	}
+	
+	public Tela_Ranking() {
+		setTitle("Ranking");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 1083, 623);
+		contentPane = new JPanel();
+		contentPane.setBorder(new CompoundBorder());
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setViewportBorder(null);
+		scrollPane.setBounds(417, 186, 629, 320);
+		contentPane.add(scrollPane);
+		
+		tblSemana = new JTable();
+		tblSemana.setShowGrid(false);
+		tblSemana.setBackground(new Color(255, 255, 255));
+		scrollPane.setViewportView(tblSemana);
+		tblSemana.setBorder(new LineBorder(new Color(0, 0, 0)));
+		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[]{"Posição", "Nome","Nivel"});
+		scrollPane.setViewportView(tblSemana);
+		tblSemana.setModel(modelo);
+		tblSemana.setEnabled(false);
+		tblSemana.getColumnModel().getColumn(0).setPreferredWidth(5);
+		tblSemana.getColumnModel().getColumn(1).setPreferredWidth(100);
+		tblSemana.getColumnModel().getColumn(2).setPreferredWidth(120);
+		
+		preencherTabela();
+		
+		JButton btnSair = new JButton("Voltar");
+		btnSair.setBackground(new Color(255, 255, 255));
+		btnSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Tela_inicial t = new Tela_inicial();
+				t.Run();
+				dispose();
+				
+			}
+		});
+		btnSair.setBounds(680, 530, 116, 43);
+		contentPane.add(btnSair);
+	
+		getRootPane().setDefaultButton(btnSair);
+		
+		JLabel label_1 = new JLabel("by R&D");
+		label_1.setBounds(759, 56, 46, 14);
+		contentPane.add(label_1);
+		
+		JLabel label_2 = new JLabel("Quiz");
+		label_2.setFont(new Font("Arial", Font.PLAIN, 40));
+		label_2.setBounds(680, 11, 80, 61);
+		contentPane.add(label_2);
+		
+		JLabel lblRanking = new JLabel("Ranking");
+		lblRanking.setFont(new Font("Showcard Gothic", Font.PLAIN, 30));
+		lblRanking.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRanking.setBounds(525, 110, 414, 51);
+		contentPane.add(lblRanking);
+		
+		JLabel lblFundo = new JLabel("");
+		lblFundo.setVerticalAlignment(SwingConstants.TOP);
+		lblFundo.setIcon(new ImageIcon("C:\\Users\\ricar\\Desktop\\Fundo2.png"));
+		lblFundo.setBounds(0, 0, 2566, 869);
+		contentPane.add(lblFundo);
+		
+	
+					
+	}
+}

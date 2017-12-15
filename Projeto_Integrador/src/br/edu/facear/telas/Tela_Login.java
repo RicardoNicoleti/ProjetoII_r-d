@@ -1,9 +1,12 @@
 package br.edu.facear.telas;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,8 +17,6 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import br.edu.facear.classes.Jogador;
-import javax.swing.ImageIcon;
-import java.awt.Color;
 
 public class Tela_Login extends JFrame {
 
@@ -27,7 +28,7 @@ public class Tela_Login extends JFrame {
 
 	
 	public void Run(){
-		this.setSize(437, 302);
+		this.setSize(645, 470);
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
@@ -42,40 +43,38 @@ public class Tela_Login extends JFrame {
 		setContentPane(painel);
 		painel.setLayout(null);
 		
-		JLabel lblLogin = new JLabel("Login");
-		lblLogin.setBounds(87, 84, 35, 17);
-		painel.add(lblLogin);
-		lblLogin.setFont(new Font("Arial", Font.PLAIN, 15));
-		
 		txtLogin = new JTextField();
-		txtLogin.setBounds(138, 83, 176, 20);
+		txtLogin.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtLogin.setToolTipText("Login");
+		txtLogin.setBounds(179, 175, 314, 25);
 		painel.add(txtLogin);
 		txtLogin.setColumns(20);
 		
-		JLabel lblSenha = new JLabel("Senha");
-		lblSenha.setBounds(83, 112, 52, 17);
-		painel.add(lblSenha);
-		lblSenha.setFont(new Font("Arial", Font.PLAIN, 15));
-		
 		txtSenha = new JPasswordField();
-		txtSenha.setBounds(138, 111, 176, 20);
+		txtSenha.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtSenha.setToolTipText("Senha");
+		txtSenha.setBounds(179, 218, 314, 25);
 		painel.add(txtSenha);
 		txtSenha.setColumns(20);
 		
 		JButton btnSair = new JButton("Sair");
-		btnSair.setBackground(new Color(255, 255, 255));
-		btnSair.setBounds(233, 141, 81, 25);
+		btnSair.setForeground(new Color(255, 255, 255));
+		btnSair.setToolTipText("Sair");
+		btnSair.setIcon(new ImageIcon("C:\\Users\\ricar\\Desktop\\ProjetoII_r-d\\Projeto_Integrador\\img\\Sair.png"));
+		btnSair.setBackground(new Color(75, 0, 130));
+		btnSair.setBounds(374, 270, 121, 57);
 		painel.add(btnSair);
 		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
 			}
 		});
-		btnSair.setFont(new Font("Arial", Font.PLAIN, 14));
+		btnSair.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 20));
 		
 		JButton btnEntrar = new JButton("Entrar");
-		btnEntrar.setBackground(new Color(255, 255, 255));
-		btnEntrar.setBounds(138, 141, 85, 25);
+		btnEntrar.setForeground(new Color(0, 0, 0));
+		btnEntrar.setBackground(new Color(0, 255, 0));
+		btnEntrar.setBounds(227, 270, 137, 57);
 		painel.add(btnEntrar);
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -93,40 +92,59 @@ public class Tela_Login extends JFrame {
 					JOptionPane.showMessageDialog(null,"Login ou senha Inválido");		
 			}
 		});
-		btnEntrar.setFont(new Font("Arial", Font.PLAIN, 14));
+		btnEntrar.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 20));
 		
 		JButton btnCadastrar = new JButton("Cadastre - se aqui");
-		btnCadastrar.setBackground(new Color(255, 255, 255));
-		btnCadastrar.setBounds(209, 190, 166, 25);
+		btnCadastrar.setForeground(new Color(0, 0, 0));
+		btnCadastrar.setBackground(new Color(0, 255, 0));
+		btnCadastrar.setBounds(277, 346, 260, 45);
 		painel.add(btnCadastrar);
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Tela_Cadastrar cadastrar = new Tela_Cadastrar();
-				cadastrar.Run();
-				dispose();
+				Tela_Cadastrar cadastrar;
+				try {
+					cadastrar = new Tela_Cadastrar();
+					cadastrar.Run();
+					dispose();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
-		btnCadastrar.setFont(new Font("Arial", Font.PLAIN, 14));
+		btnCadastrar.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 25));
 		
-		JLabel lblCadastrar = new JLabel("Não é cadastrado");
-		lblCadastrar.setBounds(87, 194, 112, 17);
+		JLabel lblCadastrar = new JLabel("N\u00E3o \u00E9 cadastrado ?");
+		lblCadastrar.setForeground(Color.BLACK);
+		lblCadastrar.setBackground(new Color(255, 255, 255));
+		lblCadastrar.setBounds(32, 352, 235, 35);
 		painel.add(lblCadastrar);
-		lblCadastrar.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblCadastrar.setFont(new Font("Arial", Font.BOLD, 25));
 	
 		getRootPane().setDefaultButton(btnEntrar);
 		
-		JLabel label = new JLabel("by R&D");
-		label.setBounds(240, 56, 46, 14);
-		painel.add(label);
+		JLabel lblSenha = new JLabel("");
+		lblSenha.setIcon(new ImageIcon("C:\\Users\\ricar\\Desktop\\ProjetoII_r-d\\Projeto_Integrador\\img\\Senha.png"));
+		lblSenha.setBounds(138, 211, 35, 37);
+		painel.add(lblSenha);
 		
-		JLabel label_1 = new JLabel("Quiz");
-		label_1.setFont(new Font("Arial", Font.PLAIN, 40));
-		label_1.setBounds(161, 11, 80, 61);
-		painel.add(label_1);
+		JLabel lblLogin = new JLabel("");
+		lblLogin.setIcon(new ImageIcon("C:\\Users\\ricar\\Desktop\\ProjetoII_r-d\\Projeto_Integrador\\img\\Login.png"));
+		lblLogin.setBounds(138, 166, 38, 37);
+		painel.add(lblLogin);
+		
+		JLabel lblLogo = new JLabel("");
+		lblLogo.setIcon(new ImageIcon("C:\\Users\\ricar\\Desktop\\ProjetoII_r-d\\Projeto_Integrador\\img\\Logo.png"));
+		lblLogo.setForeground(Color.WHITE);
+		lblLogo.setFont(new Font("Script MT Bold", Font.PLAIN, 25));
+		lblLogo.setBackground(Color.WHITE);
+		lblLogo.setBounds(159, 0, 311, 200);
+		painel.add(lblLogo);
 		
 		JLabel lblFundo = new JLabel("fundo");
-		lblFundo.setIcon(new ImageIcon("C:\\Users\\ricar\\Desktop\\ProjetoII_r-d\\Projeto_Integrador\\img\\Fundo2.png"));
-		lblFundo.setBounds(0, -25, 532, 330);
+		lblFundo.setIcon(new ImageIcon("C:\\Users\\ricar\\Desktop\\ProjetoII_r-d\\Projeto_Integrador\\img\\FundoPadrao.png"));
+		lblFundo.setBounds(-112, -14, 754, 475);
 		painel.add(lblFundo);
 	}
 }

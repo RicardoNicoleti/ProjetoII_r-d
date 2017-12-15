@@ -329,7 +329,6 @@ public class Jogo {
 			// Rodada rodada = new Rodada();
 			// rodada.setIdRodada(idRodada);
 			List<Rodada> listaRodada = new Rodada().listaRodada(id);
-
 			jogo.setRodada(listaRodada);
 
 			int idJogador1 = Integer.parseInt(vetdados[1]);
